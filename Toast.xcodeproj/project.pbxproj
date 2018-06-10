@@ -14,6 +14,10 @@
 		DC05DBB220CCEB73000C3B2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC05DBB020CCEB73000C3B2B /* LaunchScreen.storyboard */; };
 		DC05DBBB20CD0E8B000C3B2B /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBBA20CD0E8B000C3B2B /* Toast.swift */; };
 		DC05DBBD20CD0EB1000C3B2B /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBBC20CD0EB1000C3B2B /* ToastView.swift */; };
+		DC05DBC320CD0F13000C3B2B /* ToastProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBC220CD0F13000C3B2B /* ToastProtocol.swift */; };
+		DC05DBC520CD2D46000C3B2B /* ToastComponentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBC420CD2D46000C3B2B /* ToastComponentProtocol.swift */; };
+		DC05DBC820CD2F68000C3B2B /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBC720CD2F68000C3B2B /* ActivityIndicator.swift */; };
+		DC05DBCA20CD2F7A000C3B2B /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBC920CD2F7A000C3B2B /* Component.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		DC05DBB320CCEB73000C3B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC05DBBA20CD0E8B000C3B2B /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		DC05DBBC20CD0EB1000C3B2B /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		DC05DBC220CD0F13000C3B2B /* ToastProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastProtocol.swift; sourceTree = "<group>"; };
+		DC05DBC420CD2D46000C3B2B /* ToastComponentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastComponentProtocol.swift; sourceTree = "<group>"; };
+		DC05DBC720CD2F68000C3B2B /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		DC05DBC920CD2F7A000C3B2B /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +90,8 @@
 		DC05DBC020CD0EDD000C3B2B /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				DC05DBC220CD0F13000C3B2B /* ToastProtocol.swift */,
+				DC05DBC420CD2D46000C3B2B /* ToastComponentProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -90,8 +100,18 @@
 			isa = PBXGroup;
 			children = (
 				DC05DBBC20CD0EB1000C3B2B /* ToastView.swift */,
+				DC05DBC620CD2F00000C3B2B /* Components */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		DC05DBC620CD2F00000C3B2B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				DC05DBC920CD2F7A000C3B2B /* Component.swift */,
+				DC05DBC720CD2F68000C3B2B /* ActivityIndicator.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,8 +186,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC05DBBD20CD0EB1000C3B2B /* ToastView.swift in Sources */,
+				DC05DBC520CD2D46000C3B2B /* ToastComponentProtocol.swift in Sources */,
 				DC05DBAA20CCEB72000C3B2B /* ViewController.swift in Sources */,
 				DC05DBBB20CD0E8B000C3B2B /* Toast.swift in Sources */,
+				DC05DBCA20CD2F7A000C3B2B /* Component.swift in Sources */,
+				DC05DBC820CD2F68000C3B2B /* ActivityIndicator.swift in Sources */,
+				DC05DBC320CD0F13000C3B2B /* ToastProtocol.swift in Sources */,
 				DC05DBA820CCEB72000C3B2B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
