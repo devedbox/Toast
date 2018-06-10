@@ -23,10 +23,6 @@ class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         toastView.frame = view.bounds
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
         let normalIndicator = ToastView.Component.ActivityIndicator.normal
         normalIndicator.frame.origin.x = 100.0
@@ -39,6 +35,24 @@ class ViewController: UIViewController {
         
         normalIndicator.isAnimating = true
         breachedIndicator.isAnimating = true
+        
+        let barProgress = ToastView.Component.ProgressIndicator.horizontalBar
+        barProgress.frame.origin.x = 100.0
+        barProgress.frame.origin.y = 150.0
+        view.addSubview(barProgress)
+        barProgress.progress = 0.2
+        
+        let pieProgress = ToastView.Component.ProgressIndicator.pie
+        pieProgress.frame.origin.x = 100.0
+        pieProgress.frame.origin.y = 200.0
+        view.addSubview(pieProgress)
+        pieProgress.progress = 0.8
+        
+        let ringProgress = ToastView.Component.ProgressIndicator.ring
+        ringProgress.frame.origin.x = 100.0
+        ringProgress.frame.origin.y = 250.0
+        view.addSubview(ringProgress)
+        ringProgress.progress = 0.4
     }
 
     override func didReceiveMemoryWarning() {
