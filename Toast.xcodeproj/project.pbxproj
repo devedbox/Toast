@@ -38,6 +38,7 @@
 		DC05DB9B20CCEB72000C3B2B = {
 			isa = PBXGroup;
 			children = (
+				DC05DBB920CCEBA6000C3B2B /* Sources */,
 				DC05DBA620CCEB72000C3B2B /* Toast */,
 				DC05DBA520CCEB72000C3B2B /* Products */,
 			);
@@ -62,6 +63,13 @@
 				DC05DBB320CCEB73000C3B2B /* Info.plist */,
 			);
 			path = Toast;
+			sourceTree = "<group>";
+		};
+		DC05DBB920CCEBA6000C3B2B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
