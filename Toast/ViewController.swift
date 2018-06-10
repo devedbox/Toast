@@ -53,6 +53,12 @@ class ViewController: UIViewController {
         ringProgress.frame.origin.y = 250.0
         view.addSubview(ringProgress)
         ringProgress.progress = 0.4
+        
+        let colourredProgress = ToastView.Component.ProgressIndicator.colourredBar
+        colourredProgress.frame.origin.x = 100.0
+        colourredProgress.frame.origin.y = 300.0
+        view.addSubview(colourredProgress)
+        colourredProgress.progress = 1.0
     }
 
     override func didReceiveMemoryWarning() {

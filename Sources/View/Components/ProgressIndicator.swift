@@ -23,10 +23,37 @@ extension ToastView.Component {
             case pie
             /// Ring style of the progress indicator.
             case ring
+            /// Colourred bar style of the progress indicator.
+            case colourredBar
         }
         
         /// The storage of the progress value.
         private var _progress: CGFloat = 0.0
+        /// The gradient layer of the progress indicator.
+        private lazy var _gradientLayer = { () -> CAGradientLayer in
+            let layer = CAGradientLayer()
+            layer.startPoint = .zero
+            layer.endPoint = CGPoint(x: 1.0, y: 0.0)
+            layer.type = kCAGradientLayerAxial
+            layer.colors = [UInt](0..<360).map { UIColor(hue: CGFloat($0) / 360.0, saturation: 1.0, brightness: 1.0, alpha: 1.0).cgColor }
+            return layer
+        }()
+        /// The colors of the gradient layer.
+        private var _colors: [CGColor] = [] {
+            didSet {
+                _gradientLayer.colors = _colors
+            }
+        }
+        /// The display link of the progress indicator.
+        private lazy var _displayLink = { () -> CADisplayLink in
+            let link: CADisplayLink = CADisplayLink(target: self, selector: #selector(_handleDisplayLink(_:)))
+            if #available(iOS 10.0, *) {
+                link.preferredFramesPerSecond = 60
+            } else {
+                link.frameInterval = 1
+            }
+            return link
+        }()
         /// The style of the progress indicator.
         public let style: Style
         /// The drawing line width of the progress indicator.
@@ -70,9 +97,26 @@ extension ToastView.Component {
         
         private func _init() {
             backgroundColor = .clear
+            
+            if style == .colourredBar {
+                layer.addSublayer(_gradientLayer)
+                _beginAnimating()
+            }
+        }
+        
+        deinit {
+            if style == .colourredBar {
+                _displayLink.invalidate()
+            }
         }
         
         // MARK: Overrides.
+        
+        public override func layoutSublayers(of layer: CALayer) {
+            super.layoutSublayers(of: layer)
+            
+            _gradientLayer.frame = CGRect(origin: .zero, size: CGSize(width: bounds.width * _progress, height: bounds.height))
+        }
         
         public override func draw(_ rect: CGRect) {
             super.draw(rect)
@@ -88,6 +132,7 @@ extension ToastView.Component {
                 _drawProgressOfPie(using: context, in: rect)
             case .ring:
                 _drawProgressOfRing(using: context, in: rect)
+            default: break
             }
         }
     }
@@ -127,11 +172,33 @@ extension ToastView.Component.ProgressIndicator {
         indicator.frame = CGRect(origin: .zero, size: CGSize(width: 37.0, height: 37.0))
         return indicator
     }
+    
+    /// Returns an instance of `ProgressIndicator` with style of `.colourredBar` and size as `{ 180.0, 1.0 }`.
+    public class var colourredBar: ToastView.Component.ProgressIndicator {
+        let indicator = ToastView.Component.ProgressIndicator(style: .colourredBar)
+        indicator.frame = CGRect(origin: .zero, size: CGSize(width: 180.0, height: 1.0))
+        return indicator
+    }
 }
 
 // MARK: - Private.
 
 extension ToastView.Component.ProgressIndicator {
+    
+    private func _beginAnimating() {
+        _displayLink.add(to: .main, forMode: .commonModes)
+    }
+    
+    /// Handle display link.
+    @objc
+    private func _handleDisplayLink(_ sender: CADisplayLink) {
+        var colors: [Any] = _gradientLayer.colors ?? []
+        if let color = colors.popLast() {
+            colors.insert(color, at: 0)
+        }
+        _gradientLayer.colors = colors
+    }
+    
     /// Draw progress of horizontal bar style.
     private func _drawProgressOfHorizontalBar(using context: CGContext, in rect: CGRect) {
         let tintColor: UIColor = self.tintColor ?? .black
