@@ -73,9 +73,25 @@
 			isa = PBXGroup;
 			children = (
 				DC05DBBA20CD0E8B000C3B2B /* Toast.swift */,
-				DC05DBBC20CD0EB1000C3B2B /* ToastView.swift */,
+				DC05DBC120CD0EE7000C3B2B /* View */,
+				DC05DBC020CD0EDD000C3B2B /* Protocol */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		DC05DBC020CD0EDD000C3B2B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		DC05DBC120CD0EE7000C3B2B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DC05DBBC20CD0EB1000C3B2B /* ToastView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
