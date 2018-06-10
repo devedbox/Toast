@@ -26,11 +26,11 @@ class ViewController: UIViewController {
         
         let normalIndicator = ToastView.Component.ActivityIndicator.normal
         normalIndicator.frame.origin.x = 100.0
-        normalIndicator.frame.origin.y = 50.0
+        normalIndicator.frame.origin.y = 100.0
         self.view.addSubview(normalIndicator)
         let breachedIndicator = ToastView.Component.ActivityIndicator.breachedRing
         breachedIndicator.frame.origin.x = 100.0
-        breachedIndicator.frame.origin.y = 100.0
+        breachedIndicator.frame.origin.y = 150.0
         self.view.addSubview(breachedIndicator)
         
         normalIndicator.isAnimating = true
@@ -38,27 +38,29 @@ class ViewController: UIViewController {
         
         let barProgress = ToastView.Component.ProgressIndicator.horizontalBar
         barProgress.frame.origin.x = 100.0
-        barProgress.frame.origin.y = 150.0
+        barProgress.frame.origin.y = 200.0
         view.addSubview(barProgress)
         barProgress.progress = 0.2
         
         let pieProgress = ToastView.Component.ProgressIndicator.pie
         pieProgress.frame.origin.x = 100.0
-        pieProgress.frame.origin.y = 200.0
+        pieProgress.frame.origin.y = 250.0
         view.addSubview(pieProgress)
         pieProgress.progress = 0.8
         
         let ringProgress = ToastView.Component.ProgressIndicator.ring
         ringProgress.frame.origin.x = 100.0
-        ringProgress.frame.origin.y = 250.0
+        ringProgress.frame.origin.y = 300.0
         view.addSubview(ringProgress)
         ringProgress.progress = 0.4
         
         let colourredProgress = ToastView.Component.ProgressIndicator.colourredBar
         colourredProgress.frame.origin.x = 100.0
-        colourredProgress.frame.origin.y = 300.0
+        colourredProgress.frame.origin.y = 350.0
         view.addSubview(colourredProgress)
         colourredProgress.progress = 1.0
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "alert", style: .plain, target: self, action: #selector(_handleAlert(_:)))
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,4 +68,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @objc
+    private func _handleAlert(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

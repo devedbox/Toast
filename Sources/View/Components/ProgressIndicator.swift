@@ -135,6 +135,12 @@ extension ToastView.Component {
             default: break
             }
         }
+        
+        public override func tintColorDidChange() {
+            super.tintColorDidChange()
+            
+            setNeedsDisplay()
+        }
     }
 }
 
