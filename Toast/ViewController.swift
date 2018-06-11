@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Dispatch
 
 class ViewController: UIViewController {
     
@@ -59,6 +60,24 @@ class ViewController: UIViewController {
         colourredProgress.frame.origin.y = 350.0
         view.addSubview(colourredProgress)
         colourredProgress.progress = 1.0
+        
+        let contentView = ToastView.ContentView(frame: CGRect(origin: CGPoint(x: 100.0, y: 380.0), size: CGSize(width: 37.0, height: 37.0)))
+        view.addSubview(contentView)
+        contentView.style = .normal(opacity: 0.1)
+        
+        let contentView1 = ToastView.ContentView(frame: CGRect(origin: CGPoint(x: 100.0, y: 430.0), size: CGSize(width: 37.0, height: 37.0)))
+        view.addSubview(contentView1)
+        contentView1.style = .coloured(colors: [.blue, .green])
+        
+        let contentView2 = ToastView.ContentView(frame: CGRect(origin: CGPoint(x: 100.0, y: 480.0), size: CGSize(width: 37.0, height: 37.0)))
+        view.addSubview(contentView2)
+        contentView2.style = .translucent(style: .dark)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            contentView.style = .coloured(colors: [.red, .blue, .brown])
+            contentView1.style = .normal(opacity: 0.7)
+            contentView2.style = .translucent(style: .extraLight)
+        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "alert", style: .plain, target: self, action: #selector(_handleAlert(_:)))
     }

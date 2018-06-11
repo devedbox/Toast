@@ -8,15 +8,6 @@
 
 import UIKit
 
-// MARK: - ToastView.ContentView.
-
-extension ToastView {
-    /// The content view of `ToastView` to manage the components of `ToastView`.
-    public final class ContentView: UIView {
-        
-    }
-}
-
 // MARK: - ToastView.
 
 /// A view represents the container of the components of a toast.
