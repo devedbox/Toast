@@ -23,8 +23,8 @@ extension ToastView.Component {
             case pie
             /// Ring style of the progress indicator.
             case ring
-            /// Colourred bar style of the progress indicator.
-            case colourredBar
+            /// Coloured bar style of the progress indicator.
+            case colouredBar
         }
         
         /// The storage of the progress value.
@@ -98,14 +98,14 @@ extension ToastView.Component {
         private func _init() {
             backgroundColor = .clear
             
-            if style == .colourredBar {
+            if style == .colouredBar {
                 layer.addSublayer(_gradientLayer)
                 _beginAnimating()
             }
         }
         
         deinit {
-            if style == .colourredBar {
+            if style == .colouredBar {
                 _displayLink.invalidate()
             }
         }
@@ -155,6 +155,7 @@ extension ToastView.Component.ProgressIndicator {
         set {
             _progress = min(max(newValue, 0.0), 1.0)
             setNeedsDisplay()
+            setNeedsLayout()
         }
     }
     
@@ -179,9 +180,9 @@ extension ToastView.Component.ProgressIndicator {
         return indicator
     }
     
-    /// Returns an instance of `ProgressIndicator` with style of `.colourredBar` and size as `{ 180.0, 1.0 }`.
-    public class var colourredBar: ToastView.Component.ProgressIndicator {
-        let indicator = ToastView.Component.ProgressIndicator(style: .colourredBar)
+    /// Returns an instance of `ProgressIndicator` with style of `.colouredBar` and size as `{ 180.0, 1.0 }`.
+    public class var colouredBar: ToastView.Component.ProgressIndicator {
+        let indicator = ToastView.Component.ProgressIndicator(style: .colouredBar)
         indicator.frame = CGRect(origin: .zero, size: CGSize(width: 180.0, height: 1.0))
         return indicator
     }

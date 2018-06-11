@@ -12,7 +12,17 @@ import Dispatch
 class ViewController: UIViewController {
     
     let toastView = ToastView()
+    weak var barProgress: ToastView.Component.ProgressIndicator?
+    weak var pieProgress: ToastView.Component.ProgressIndicator?
+    weak var ringProgress: ToastView.Component.ProgressIndicator?
+    weak var colouredProgress: ToastView.Component.ProgressIndicator?
 
+    let timer = Timer(timeInterval: 0.1, target: self, selector: #selector(_handleTimer(_:)), userInfo: nil, repeats: true)
+    
+    deinit {
+        timer.invalidate()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -41,24 +51,28 @@ class ViewController: UIViewController {
         barProgress.frame.origin.x = 100.0
         barProgress.frame.origin.y = 200.0
         view.addSubview(barProgress)
+        self.barProgress = barProgress
         barProgress.progress = 0.2
         
         let pieProgress = ToastView.Component.ProgressIndicator.pie
         pieProgress.frame.origin.x = 100.0
         pieProgress.frame.origin.y = 250.0
         view.addSubview(pieProgress)
+        self.pieProgress = pieProgress
         pieProgress.progress = 0.8
         
         let ringProgress = ToastView.Component.ProgressIndicator.ring
         ringProgress.frame.origin.x = 100.0
         ringProgress.frame.origin.y = 300.0
         view.addSubview(ringProgress)
+        self.ringProgress = ringProgress
         ringProgress.progress = 0.4
         
-        let colourredProgress = ToastView.Component.ProgressIndicator.colourredBar
+        let colourredProgress = ToastView.Component.ProgressIndicator.colouredBar
         colourredProgress.frame.origin.x = 100.0
         colourredProgress.frame.origin.y = 350.0
         view.addSubview(colourredProgress)
+        self.colouredProgress = colourredProgress
         colourredProgress.progress = 1.0
         
         let contentView = ToastView.ContentView(frame: CGRect(origin: CGPoint(x: 100.0, y: 380.0), size: CGSize(width: 37.0, height: 37.0)))
@@ -80,6 +94,9 @@ class ViewController: UIViewController {
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "alert", style: .plain, target: self, action: #selector(_handleAlert(_:)))
+        
+        let timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(_handleTimer(_:)), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer, forMode: .commonModes)
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,5 +109,29 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func _handleTimer(_ timer: Timer) {
+        if case let progress? = barProgress?.progress, progress >= 1.0 {
+            barProgress?.progress = 0.01
+        } else {
+            barProgress?.progress += 0.01
+        }
+        if case let progress? = pieProgress?.progress, progress >= 1.0 {
+            pieProgress?.progress = 0.01
+        } else {
+            pieProgress?.progress += 0.01
+        }
+        if case let progress? = ringProgress?.progress, progress >= 1.0 {
+            ringProgress?.progress = 0.01
+        } else {
+            ringProgress?.progress += 0.01
+        }
+        if case let progress? = colouredProgress?.progress, progress >= 1.0 {
+            colouredProgress?.progress = 0.1
+        } else {
+            colouredProgress?.progress += 0.1
+        }
     }
 }
