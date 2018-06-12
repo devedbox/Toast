@@ -15,9 +15,10 @@
 		DC05DBBB20CD0E8B000C3B2B /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBBA20CD0E8B000C3B2B /* Toast.swift */; };
 		DC05DBBD20CD0EB1000C3B2B /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBBC20CD0EB1000C3B2B /* ToastView.swift */; };
 		DC05DBC320CD0F13000C3B2B /* ToastProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBC220CD0F13000C3B2B /* ToastProtocol.swift */; };
-		DC05DBC520CD2D46000C3B2B /* ToastComponentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBC420CD2D46000C3B2B /* ToastComponentProtocol.swift */; };
+		DC05DBC520CD2D46000C3B2B /* ToastComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBC420CD2D46000C3B2B /* ToastComponent.swift */; };
 		DC05DBC820CD2F68000C3B2B /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBC720CD2F68000C3B2B /* ActivityIndicator.swift */; };
 		DC05DBCA20CD2F7A000C3B2B /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBC920CD2F7A000C3B2B /* Component.swift */; };
+		DC49C9D520D0111700FF3C1F /* ToastError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49C9D420D0111700FF3C1F /* ToastError.swift */; };
 		DCE959E420CEC21400E5CC0B /* ToastContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE959E320CEC21400E5CC0B /* ToastContentView.swift */; };
 		DCF5C8C520CD4C8C0097C3C9 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF5C8C420CD4C8C0097C3C9 /* ProgressIndicator.swift */; };
 /* End PBXBuildFile section */
@@ -33,9 +34,10 @@
 		DC05DBBA20CD0E8B000C3B2B /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		DC05DBBC20CD0EB1000C3B2B /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		DC05DBC220CD0F13000C3B2B /* ToastProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastProtocol.swift; sourceTree = "<group>"; };
-		DC05DBC420CD2D46000C3B2B /* ToastComponentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastComponentProtocol.swift; sourceTree = "<group>"; };
+		DC05DBC420CD2D46000C3B2B /* ToastComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastComponent.swift; sourceTree = "<group>"; };
 		DC05DBC720CD2F68000C3B2B /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		DC05DBC920CD2F7A000C3B2B /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		DC49C9D420D0111700FF3C1F /* ToastError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastError.swift; sourceTree = "<group>"; };
 		DCE959E320CEC21400E5CC0B /* ToastContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastContentView.swift; sourceTree = "<group>"; };
 		DCF5C8C420CD4C8C0097C3C9 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				DC05DBBA20CD0E8B000C3B2B /* Toast.swift */,
+				DC49C9D420D0111700FF3C1F /* ToastError.swift */,
 				DC05DBC120CD0EE7000C3B2B /* View */,
 				DC05DBC020CD0EDD000C3B2B /* Protocol */,
 			);
@@ -95,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				DC05DBC220CD0F13000C3B2B /* ToastProtocol.swift */,
-				DC05DBC420CD2D46000C3B2B /* ToastComponentProtocol.swift */,
+				DC05DBC420CD2D46000C3B2B /* ToastComponent.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -192,10 +195,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC05DBBD20CD0EB1000C3B2B /* ToastView.swift in Sources */,
-				DC05DBC520CD2D46000C3B2B /* ToastComponentProtocol.swift in Sources */,
+				DC05DBC520CD2D46000C3B2B /* ToastComponent.swift in Sources */,
 				DC05DBAA20CCEB72000C3B2B /* ViewController.swift in Sources */,
 				DC05DBBB20CD0E8B000C3B2B /* Toast.swift in Sources */,
 				DC05DBCA20CD2F7A000C3B2B /* Component.swift in Sources */,
+				DC49C9D520D0111700FF3C1F /* ToastError.swift in Sources */,
 				DC05DBC820CD2F68000C3B2B /* ActivityIndicator.swift in Sources */,
 				DC05DBC320CD0F13000C3B2B /* ToastProtocol.swift in Sources */,
 				DCF5C8C520CD4C8C0097C3C9 /* ProgressIndicator.swift in Sources */,
