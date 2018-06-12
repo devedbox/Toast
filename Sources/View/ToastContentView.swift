@@ -113,6 +113,12 @@ extension ToastView.ContentView {
     }
 }
 
+// MARK: - ToastComponentsContainer.
+
+extension ToastView.ContentView: ToastComponentsContainer {
+    
+}
+
 // MARK: - Private.
 
 extension ToastView.ContentView {
