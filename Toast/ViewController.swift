@@ -27,13 +27,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // view.addSubview(toastView)
+        toastView.tintColor = .orange
+        view.addSubview(toastView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        toastView.frame = view.bounds
+        toastView.frame = CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: view.bounds.height * 0.5))
+        let indicator = ToastView.Component.ActivityIndicator.normal
+        toastView.add(component: indicator)
+        indicator.isAnimating = true
         
         let normalIndicator = ToastView.Component.ActivityIndicator.normal
         normalIndicator.frame.origin.x = 100.0

@@ -51,6 +51,8 @@ public final class ToastView: UIView {
     
     private func _init() {
         super.backgroundColor = .clear
+        
+        addSubview(_contentView)
     }
     
     // MARK: Overrides.
@@ -72,6 +74,9 @@ public final class ToastView: UIView {
         super.layoutSubviews()
         
         _layoutContentViews()
+        
+        _contentView.frame.origin.x = bounds.width * 0.5 - _contentView.bounds.width * 0.5
+        _contentView.frame.origin.y = bounds.height * 0.5 - _contentView.bounds.height * 0.5
     }
 }
 
@@ -81,6 +86,14 @@ extension ToastView {
     /// Content view of `ToastView.ContentView` to manage the components of `ToastView`.
     public var contentView: ContentView {
         return _contentView
+    }
+    
+    /// Add component to the receiver.
+    public func add(component: UIView & ToastComponent) {
+        _components.append(component)
+        _contentView.addSubview(component)
+        
+        setNeedsLayout()
     }
 }
 
@@ -99,6 +112,6 @@ extension ToastView {
     
     /// Layouts content views.
     private func _layoutContentViews() {
-        _components.forEach { [unowned self] in $0.layout(in: self._contentView) }
+        _components.forEach { [unowned self] in $0.layout(in: self._contentView, provider: self) }
     }
 }

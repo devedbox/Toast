@@ -195,12 +195,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC05DBBD20CD0EB1000C3B2B /* ToastView.swift in Sources */,
-				DC05DBC520CD2D46000C3B2B /* ToastComponent.swift in Sources */,
 				DC05DBAA20CCEB72000C3B2B /* ViewController.swift in Sources */,
 				DC05DBBB20CD0E8B000C3B2B /* Toast.swift in Sources */,
 				DC05DBCA20CD2F7A000C3B2B /* Component.swift in Sources */,
 				DC49C9D520D0111700FF3C1F /* ToastError.swift in Sources */,
 				DC05DBC820CD2F68000C3B2B /* ActivityIndicator.swift in Sources */,
+				DC05DBC520CD2D46000C3B2B /* ToastComponent.swift in Sources */,
 				DC05DBC320CD0F13000C3B2B /* ToastProtocol.swift in Sources */,
 				DCF5C8C520CD4C8C0097C3C9 /* ProgressIndicator.swift in Sources */,
 				DCE959E420CEC21400E5CC0B /* ToastContentView.swift in Sources */,

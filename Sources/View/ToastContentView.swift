@@ -116,7 +116,18 @@ extension ToastView.ContentView {
 // MARK: - ToastComponentsContainer.
 
 extension ToastView.ContentView: ToastComponentsContainer {
-    
+    /// The content size of `ToastView.ContentView`.
+    public var size: CGSize {
+        get {
+            return bounds.size
+        }
+        set {
+            bounds.size = newValue
+        }
+    }
+    public func update(size: CGSize) {
+        self.size = size
+    }
 }
 
 // MARK: - Private.
