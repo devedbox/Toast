@@ -12,10 +12,13 @@ import UIKit
 
 /// A view represents the container of the components of a toast.
 public final class ToastView: UIView {
-    /// Opacity of the diming background of the toast view. Default is 0.3.
-    public var opacity: CGFloat = 0.3
+    
     /// Content view of `ToastView.ContentView` to manage the components of `ToastView`.
     private lazy var _contentView: ContentView = ContentView()
+    /// The components the toast view consists of.
+    private var _components: [UIView & ToastComponent] = []
+    /// Opacity of the diming background of the toast view. Default is 0.3.
+    public var opacity: CGFloat = 0.3
     /// Overrides the background color of the toast view to ignore the background color.
     public override var backgroundColor: UIColor? {
         get {
@@ -67,6 +70,8 @@ public final class ToastView: UIView {
     /// Layouts the subviews.
     public override func layoutSubviews() {
         super.layoutSubviews()
+        
+        _layoutContentViews()
     }
 }
 
@@ -76,5 +81,24 @@ extension ToastView {
     /// Content view of `ToastView.ContentView` to manage the components of `ToastView`.
     public var contentView: ContentView {
         return _contentView
+    }
+}
+
+// MARK: - ToastComponentsProvider.
+
+extension ToastView: ToastComponentsProvider {
+    /// Components managed by the toast view.
+    public var components: [ToastComponent] {
+        return _components
+    }
+}
+
+// MARK: - Private.
+
+extension ToastView {
+    
+    /// Layouts content views.
+    private func _layoutContentViews() {
+        _components.forEach { [unowned self] in $0.layout(in: self._contentView) }
     }
 }
