@@ -87,61 +87,15 @@ extension ToastView.Component {
             guard let context = UIGraphicsGetCurrentContext() else {
                 return
             }
-            let tintColor = self.tintColor ?? .black
             
             context.setLineWidth(_lineWidth)
             context.setLineCap(.round)
             
             switch style {
             case .breachedRing:
-                context.setStrokeColor(tintColor.cgColor)
-                
-                var drawingBox = bounds.insetBy(dx: _lineWidth, dy: _lineWidth)
-                let delta = min(drawingBox.width, drawingBox.height)
-                drawingBox.origin.x += fabs(drawingBox.width - delta) * 0.5
-                drawingBox.origin.y += fabs(drawingBox.height - delta) * 0.5
-                drawingBox.size.width = delta
-                drawingBox.size.height = delta
-                
-                context.beginPath()
-                
-                context.addArc(center: CGPoint(x: drawingBox.midX, y: drawingBox.midY),
-                               radius: delta * 0.5,
-                               startAngle: 0.0,
-                               endAngle: CGFloat.pi * 2 - _breachedAngle,
-                               clockwise: false)
-                
-                context.strokePath()
+                _drawBreachedRing(using: context, in: rect)
             case .normal:
-                let separatorAngle = CGFloat.pi * 2.0 / CGFloat(_drawingComponents)
-                for i in 0..<_drawingComponents {
-                    let angle = separatorAngle * CGFloat(i) - CGFloat.pi * 0.5 + _angleOffset
-                    let color = _shouldGradientColorIndex ? tintColor.withAlphaComponent(max(0.3, CGFloat(i) / CGFloat(_drawingComponents))) : tintColor
-                    
-                    context.setStrokeColor(color.cgColor)
-                    
-                    var drawingBox = bounds.insetBy(dx: _lineWidth * 0.5, dy: _lineWidth * 0.5)
-                    let delta = min(drawingBox.width, drawingBox.height)
-                    drawingBox.origin.x += fabs(drawingBox.width - delta) * 0.5
-                    drawingBox.origin.y += fabs(drawingBox.height - delta) * 0.5
-                    drawingBox.size.width = delta
-                    drawingBox.size.height = delta
-                    
-                    let radius = drawingBox.width * 0.5
-                    let innerRadius = radius * 0.5 + _lineWidth * 0.5
-                    let center = CGPoint(x: bounds.width * 0.5, y: bounds.height * 0.5)
-                    let beginPoint = CGPoint(x: center.x - bounds.origin.x + innerRadius*cos(angle),
-                                             y: center.y - bounds.origin.y + innerRadius * sin(angle))
-                    let endPoint = CGPoint(x: center.x - bounds.origin.x + radius * cos(angle),
-                                           y: center.y - bounds.origin.y + radius * sin(angle))
-                    
-                    context.beginPath()
-                    
-                    context.move(to: beginPoint)
-                    context.addLine(to: endPoint)
-                    
-                    context.strokePath()
-                }
+                _drawNormal(using: context, in: rect)
             }
         }
         
@@ -222,5 +176,62 @@ extension ToastView.Component.ActivityIndicator {
         if _animating {
             isAnimating = _animating
         }
+    }
+    
+    /// Draws normal style of the activity indicator.
+    private func _drawNormal(using context: CGContext, in rect: CGRect) {
+        let tintColor = self.tintColor ?? .black
+        let separatorAngle = CGFloat.pi * 2.0 / CGFloat(_drawingComponents)
+        for i in 0..<_drawingComponents {
+            let angle = separatorAngle * CGFloat(i) - CGFloat.pi * 0.5 + _angleOffset
+            let color = _shouldGradientColorIndex ? tintColor.withAlphaComponent(max(0.3, CGFloat(i) / CGFloat(_drawingComponents))) : tintColor
+            
+            context.setStrokeColor(color.cgColor)
+            
+            var drawingBox = bounds.insetBy(dx: _lineWidth * 0.5, dy: _lineWidth * 0.5)
+            let delta = min(drawingBox.width, drawingBox.height)
+            drawingBox.origin.x += fabs(drawingBox.width - delta) * 0.5
+            drawingBox.origin.y += fabs(drawingBox.height - delta) * 0.5
+            drawingBox.size.width = delta
+            drawingBox.size.height = delta
+            
+            let radius = drawingBox.width * 0.5
+            let innerRadius = radius * 0.5 + _lineWidth * 0.5
+            let center = CGPoint(x: bounds.width * 0.5, y: bounds.height * 0.5)
+            let beginPoint = CGPoint(x: center.x - bounds.origin.x + innerRadius*cos(angle),
+                                     y: center.y - bounds.origin.y + innerRadius * sin(angle))
+            let endPoint = CGPoint(x: center.x - bounds.origin.x + radius * cos(angle),
+                                   y: center.y - bounds.origin.y + radius * sin(angle))
+            
+            context.beginPath()
+            
+            context.move(to: beginPoint)
+            context.addLine(to: endPoint)
+            
+            context.strokePath()
+        }
+    }
+    
+    /// Draws breached ring style of the activity indicator.
+    private func _drawBreachedRing(using context: CGContext, in rect: CGRect) {
+        let tintColor = self.tintColor ?? .black
+        context.setStrokeColor(tintColor.cgColor)
+        
+        var drawingBox = bounds.insetBy(dx: _lineWidth, dy: _lineWidth)
+        let delta = min(drawingBox.width, drawingBox.height)
+        drawingBox.origin.x += fabs(drawingBox.width - delta) * 0.5
+        drawingBox.origin.y += fabs(drawingBox.height - delta) * 0.5
+        drawingBox.size.width = delta
+        drawingBox.size.height = delta
+        
+        context.beginPath()
+        
+        context.addArc(center: CGPoint(x: drawingBox.midX, y: drawingBox.midY),
+                       radius: delta * 0.5,
+                       startAngle: 0.0,
+                       endAngle: CGFloat.pi * 2 - _breachedAngle,
+                       clockwise: false)
+        
+        context.strokePath()
     }
 }
