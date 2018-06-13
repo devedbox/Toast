@@ -28,10 +28,10 @@ public enum ToastComponentOrder {
 public protocol ToastComponent: class {
     
     /// Returns the frame of the receiver component.
-    var frame: CGRect { get }
+    var frame: CGRect { get set }
     
     /// The layout info of the component.
-    var layout: ToastView.Component.Layout { get }
+    var layout: ToastView.Component.Layout { get set }
     
     /// Layout the frame of the receiver in a given container of `ToastComponentsContainer`.
     func layout(in container: ToastComponentsContainer, provider: ToastComponentsProvider)
