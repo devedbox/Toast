@@ -14,10 +14,10 @@ extension ToastView.Component {
     /// The layout spec of the toast component.
     public struct Layout {
         
-        // MARK: Direction.
+        // MARK: Distribution.
         
-        /// The layout direction of `ToastComponent` used by the toast component to layout.
-        public enum Direction: Equatable {
+        /// The layout distribution of `ToastComponent` used by the toast component to layout.
+        public enum Distribution: Equatable {
             
             // MARK: Horizontal.
             
@@ -46,7 +46,7 @@ extension ToastView.Component {
         
         /// The insets of the component's edge.
         public var insets: UIEdgeInsets
-        /// The preferred layout direction of `ToastComponent`.
-        public var preferredDirection: Direction
+        /// The preferred layout distribution of `ToastComponent`.
+        public var distribution: Distribution
     }
 }

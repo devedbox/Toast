@@ -22,7 +22,7 @@ extension ToastView.Component {
     open class View: UIView, ToastComponent {
         /// The layout info of the component.
         open var layout = ToastView.Component.Layout(insets: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
-                                                       preferredDirection: .vertical(at: .bottom))
+                                                     distribution: .vertical(at: .bottom))
     }
 }
 
@@ -49,7 +49,7 @@ extension ToastView.Component.View {
             }
             let ppComp = provider.previousComponents(before: previousComp).last
             
-            switch layout.preferredDirection {
+            switch layout.distribution {
             case .horizontal(at: let position):
 
                 /// Layout the component related to the previous component on the left.
@@ -66,13 +66,13 @@ extension ToastView.Component.View {
                 
                 switch position {
                 case .left:
-                    if previousComp.layout.preferredDirection == .horizontal(at: .right), ppComp != nil {
+                    if previousComp.layout.distribution == .horizontal(at: .right), ppComp != nil {
                         _layoutOnRight()
                     } else {
                         _layoutOnLeft()
                     }
                 case .right:
-                    if previousComp.layout.preferredDirection == .horizontal(at: .left), ppComp != nil {
+                    if previousComp.layout.distribution == .horizontal(at: .left), ppComp != nil {
                         _layoutOnLeft()
                     } else {
                         _layoutOnRight()
@@ -97,13 +97,13 @@ extension ToastView.Component.View {
                 
                 switch position {
                 case .top:
-                    if previousComp.layout.preferredDirection == .vertical(at: .bottom), ppComp != nil {
+                    if previousComp.layout.distribution == .vertical(at: .bottom), ppComp != nil {
                         _layoutOnBottom()
                     } else {
                         _layoutOnTop()
                     }
                 case .bottom:
-                    if previousComp.layout.preferredDirection == .vertical(at: .top), ppComp != nil {
+                    if previousComp.layout.distribution == .vertical(at: .top), ppComp != nil {
                         _layoutOnTop()
                     } else {
                         _layoutOnBottom()

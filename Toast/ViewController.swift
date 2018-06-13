@@ -36,16 +36,16 @@ class ViewController: UIViewController {
         
         toastView.frame = CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: view.bounds.height * 0.5))
         let indicator = ToastView.Component.ActivityIndicator.normal
-        indicator.layout.preferredDirection = .vertical(at: .top)
+        indicator.layout.distribution = .vertical(at: .top)
         let indicator2 = ToastView.Component.ActivityIndicator.breachedRing
-        indicator2.layout.preferredDirection = .horizontal(at: .right)
+        indicator2.layout.distribution = .horizontal(at: .right)
         toastView.add(component: indicator)
         toastView.add(component: indicator2)
         indicator.isAnimating = true
         indicator2.isAnimating = true
         let indicator3 = ToastView.Component.ProgressIndicator.pie
         indicator3.progress = 0.6
-        indicator3.layout.preferredDirection = .horizontal(at: .left)
+        indicator3.layout.distribution = .horizontal(at: .left)
         toastView.add(component: indicator3)
         
         let normalIndicator = ToastView.Component.ActivityIndicator.normal
