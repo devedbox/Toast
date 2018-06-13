@@ -68,13 +68,15 @@ extension ToastView.Component.View {
                 case .left:
                     if previousComp.layout.preferredDirection == .horizontal(at: .right), ppComp != nil {
                         _layoutOnRight()
+                    } else {
+                        _layoutOnLeft()
                     }
-                    _layoutOnLeft()
                 case .right:
                     if previousComp.layout.preferredDirection == .horizontal(at: .left), ppComp != nil {
                         _layoutOnLeft()
+                    } else {
+                        _layoutOnRight()
                     }
-                    _layoutOnRight()
                 }
                 
                 container.extends(size: CGSize(width: bounds.width + layout.insets.width,
@@ -97,13 +99,15 @@ extension ToastView.Component.View {
                 case .top:
                     if previousComp.layout.preferredDirection == .vertical(at: .bottom), ppComp != nil {
                         _layoutOnBottom()
+                    } else {
+                        _layoutOnTop()
                     }
-                    _layoutOnTop()
                 case .bottom:
                     if previousComp.layout.preferredDirection == .vertical(at: .top), ppComp != nil {
                         _layoutOnTop()
+                    } else {
+                        _layoutOnBottom()
                     }
-                    _layoutOnBottom()
                 }
                 
                 container.extends(size: CGSize(width: max(bounds.width + layout.insets.width - container.size.width, 0.0),

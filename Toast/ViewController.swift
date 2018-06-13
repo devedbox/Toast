@@ -43,6 +43,10 @@ class ViewController: UIViewController {
         toastView.add(component: indicator2)
         indicator.isAnimating = true
         indicator2.isAnimating = true
+        let indicator3 = ToastView.Component.ProgressIndicator.pie
+        indicator3.progress = 0.6
+        indicator3.layout.preferredDirection = .horizontal(at: .left)
+        toastView.add(component: indicator3)
         
         let normalIndicator = ToastView.Component.ActivityIndicator.normal
         normalIndicator.frame.origin.x = 100.0
