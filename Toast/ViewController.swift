@@ -138,8 +138,20 @@ class ViewController: UIViewController {
         // alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         // self.present(alert, animated: true, completion: nil)
         
-        let toast = ToastController()
+        let indicator = ToastView.Component.ActivityIndicator.breachedRing
+        indicator.isAnimating = true
+        let textLabel = ToastView.Component.Label()
+        textLabel.numberOfLines = 0
+        textLabel.font = UIFont.systemFont(ofSize: 14)
+        textLabel.text = "加载中..."
+        textLabel.layout.insets = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 10.0, right: 15.0)
+        let toast = ToastController(components: [indicator, textLabel])
+        toast.toastView.tintColor = toastView.tintColor
+        toast.toastView.contentView.style = toastView.contentView.style
         self.present(toast, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            toast.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc

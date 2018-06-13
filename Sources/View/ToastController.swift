@@ -12,7 +12,7 @@ import Foundation
 public final class ToastController: UIViewController {
     
     /// Returns the toast view of the toast controller.
-    private var _toastView: ToastView! {
+    public var toastView: ToastView! {
         return view as! ToastView
     }
     
@@ -39,6 +39,11 @@ public final class ToastController: UIViewController {
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self._init()
+    }
+    
+    public convenience init(components: [UIView & ToastComponent]) {
+        self.init(nibName: nil, bundle: nil)
+        toastView.set(components: components)
     }
     
     private func _init() {
