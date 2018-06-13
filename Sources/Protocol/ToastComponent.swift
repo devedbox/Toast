@@ -26,13 +26,10 @@ public enum ToastComponentOrder {
 /// A ptotocol represents the conforming types can perform like the component of a toast view
 /// of `ToastView`.
 public protocol ToastComponent: class {
-    
     /// Returns the frame of the receiver component.
     var frame: CGRect { get set }
-    
     /// The layout info of the component.
     var layout: ToastView.Component.Layout { get set }
-    
     /// Layout the frame of the receiver in a given container of `ToastComponentsContainer`.
     func layout(in container: ToastComponentsContainer, provider: ToastComponentsProvider)
 }
@@ -41,13 +38,10 @@ public protocol ToastComponent: class {
 
 /// A protocol represents the container for instances of `ToastComponent`.
 public protocol ToastComponentsContainer {
-    
     /// The max allowed layout width of the container.
     var maxAllowedLayoutWidth: CGFloat { get }
-    
     /// The content size of the container.
     var size: CGSize { get }
-    
     /// Extends the layout bounds of the container with a given size.
     func extends(size: CGSize)
 }
