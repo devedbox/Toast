@@ -42,6 +42,9 @@ public protocol ToastComponent: class {
 /// A protocol represents the container for instances of `ToastComponent`.
 public protocol ToastComponentsContainer {
     
+    /// The max allowed layout width of the container.
+    var maxAllowedLayoutWidth: CGFloat { get }
+    
     /// The content size of the container.
     var size: CGSize { get }
     

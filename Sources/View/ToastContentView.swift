@@ -30,6 +30,8 @@ extension ToastView {
         private var _effectView: UIVisualEffectView?
         /// The gradient layer for the coloured style.
         private lazy var _gradientLayer = CAGradientLayer()
+        /// The max allowed layout width of content view.
+        private var _maxAllowedLayoutWidth: CGFloat = 270.0
         /// The style of the instance of `ContentView`.
         public var style: Style = .normal(opacity: 0.89) {
             willSet {
@@ -152,6 +154,16 @@ extension ToastView.ContentView {
 // MARK: - ToastComponentsContainer.
 
 extension ToastView.ContentView: ToastComponentsContainer {
+    /// The max allowed layout width of the container.
+    public var maxAllowedLayoutWidth: CGFloat {
+        get {
+            return _maxAllowedLayoutWidth
+        }
+        set {
+            _maxAllowedLayoutWidth = newValue
+        }
+    }
+    
     /// The content size of `ToastView.ContentView`.
     public var size: CGSize {
         return bounds.size

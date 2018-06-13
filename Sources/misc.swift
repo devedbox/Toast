@@ -46,7 +46,7 @@ public func layout(component: ToastComponent, in container: ToastComponentsConta
             return
         }
         let ppComp = provider.previousComponents(before: previousComp).last
-        
+
         switch component.layout.distribution {
         case .horizontal(at: let position):
             /// Align the component vertically.
@@ -83,13 +83,25 @@ public func layout(component: ToastComponent, in container: ToastComponentsConta
             
             switch position {
             case .left:
-                if previousComp.layout.distribution == .horizontal(at: .right), ppComp != nil {
+                var reversedIterator = provider.components.reversed().makeIterator()
+                var shouldLayoutOnRight = false
+                while let next = reversedIterator.next() {
+                    shouldLayoutOnRight = (next.layout.distribution == .horizontal(at: .right) && reversedIterator.next() != nil)
+                }
+                
+                if shouldLayoutOnRight {
                     _layoutOnRight()
                 } else {
                     _layoutOnLeft()
                 }
             case .right:
-                if previousComp.layout.distribution == .horizontal(at: .left), ppComp != nil {
+                var reversedIterator = provider.components.reversed().makeIterator()
+                var shouldLayoutOnLeft = false
+                while let next = reversedIterator.next() {
+                    shouldLayoutOnLeft = (next.layout.distribution == .horizontal(at: .left) && reversedIterator.next() != nil)
+                }
+                
+                if shouldLayoutOnLeft {
                     _layoutOnLeft()
                 } else {
                     _layoutOnRight()
@@ -130,13 +142,25 @@ public func layout(component: ToastComponent, in container: ToastComponentsConta
             
             switch position {
             case .top:
-                if previousComp.layout.distribution == .vertical(at: .bottom), ppComp != nil {
+                var reversedIterator = provider.components.reversed().makeIterator()
+                var shouldLayoutOnBottom = false
+                while let next = reversedIterator.next() {
+                    shouldLayoutOnBottom = (next.layout.distribution == .vertical(at: .bottom) && reversedIterator.next() != nil)
+                }
+                
+                if shouldLayoutOnBottom {
                     _layoutOnBottom()
                 } else {
                     _layoutOnTop()
                 }
             case .bottom:
-                if previousComp.layout.distribution == .vertical(at: .top), ppComp != nil {
+                var reversedIterator = provider.components.reversed().makeIterator()
+                var shouldLayoutOnTop = false
+                while let next = reversedIterator.next() {
+                    shouldLayoutOnTop = (next.layout.distribution == .vertical(at: .top) && reversedIterator.next() != nil)
+                }
+                
+                if shouldLayoutOnTop {
                     _layoutOnTop()
                 } else {
                     _layoutOnBottom()

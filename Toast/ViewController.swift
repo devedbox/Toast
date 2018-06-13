@@ -53,6 +53,11 @@ class ViewController: UIViewController {
         // indicator3.frame.size = CGSize(width: 120.0, height: 120.0)
         toastView.add(component: indicator3)
         
+        let textLabel = ToastView.Component.Label()
+        textLabel.numberOfLines = 0
+        textLabel.text = "asdaidjaidjaiodjaiodjaoidhaoidbaodhaoisdhaiosdhaodhaoidhaiodhsoaihdddddddddddddddddddhdaoidhsiaohdioahdsoiahsoidhaiohsdahdaoihsdioahiosdhoaihdiohaiohdioahds"
+        toastView.add(component: textLabel)
+        
         toastView.contentView.style = .coloured(colors: [.purple, .blue])
         
         let normalIndicator = ToastView.Component.ActivityIndicator.normal
