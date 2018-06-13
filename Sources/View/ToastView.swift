@@ -18,7 +18,7 @@ public final class ToastView: UIView {
     /// The components the toast view consists of.
     private var _components: [UIView & ToastComponent] = []
     /// Opacity of the diming background of the toast view. Default is 0.3.
-    public var opacity: CGFloat = 0.3
+    public var opacity: CGFloat = 0.0
     /// Overrides the background color of the toast view to ignore the background color.
     public override var backgroundColor: UIColor? {
         get {
@@ -52,6 +52,8 @@ public final class ToastView: UIView {
     private func _init() {
         super.backgroundColor = .clear
         
+        _contentView.layer.cornerRadius = 2.0
+        _contentView.layer.masksToBounds = true
         addSubview(_contentView)
     }
     
@@ -112,6 +114,17 @@ extension ToastView {
     
     /// Layouts content views.
     private func _layoutContentViews() {
+        // Reset the size of content view.
+        _contentView.bounds.size = .zero
+        // Layout components.
         _components.forEach { [unowned self] in $0.layout(in: self._contentView, provider: self) }
+        
+        let point = _components.reduce((0.0, 0.0), { (min($0.0, $1.frame.minX - $1.layout.insets.left),
+                                                      min($0.1, $1.frame.minY - $1.layout.insets.top)) })
+        // Align the components.
+        _components.forEach {
+            $0.frame.origin.x -= point.0
+            $0.frame.origin.y -= point.1
+        }
     }
 }
