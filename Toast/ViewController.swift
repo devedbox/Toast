@@ -59,6 +59,9 @@ class ViewController: UIViewController {
         toastView.add(component: textLabel)
         
         toastView.contentView.style = .coloured(colors: [.purple, .blue])
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.toastView.remove(component: textLabel)
+        }
         
         let normalIndicator = ToastView.Component.ActivityIndicator.normal
         normalIndicator.frame.origin.x = 100.0

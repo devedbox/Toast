@@ -97,6 +97,30 @@ extension ToastView {
         
         setNeedsLayout()
     }
+    
+    /// Remove the given component if the component is in the components of the receiver.
+    @discardableResult
+    public func remove(component: UIView & ToastComponent) -> Bool {
+        guard let index = _components.index(where: { $0 === component }) else {
+            return false
+        }
+        
+        _components.remove(at: index)
+        component.removeFromSuperview()
+        
+        setNeedsLayout()
+        
+        return true
+    }
+    
+    /// Set components to the receiver and remove the old ones.
+    public func set(components: [UIView & ToastComponent]) {
+        _components.forEach { $0.removeFromSuperview() }
+        _components = components
+        _components.forEach { [unowned self] in self._contentView.addSubview($0) }
+        
+        setNeedsLayout()
+    }
 }
 
 // MARK: - ToastComponentsProvider.
