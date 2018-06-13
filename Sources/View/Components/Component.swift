@@ -22,7 +22,8 @@ extension ToastView.Component {
     open class View: UIView, ToastComponent {
         /// The layout info of the component.
         open var layout = ToastView.Component.Layout(insets: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
-                                                     distribution: .vertical(at: .bottom))
+                                                     distribution: .vertical(at: .bottom),
+                                                     alignment: .center)
     }
 }
 
@@ -51,17 +52,36 @@ extension ToastView.Component.View {
             
             switch layout.distribution {
             case .horizontal(at: let position):
-
+                /// Align the component vertically.
+                func _alignVertically() {
+                    let layoutHeight = bounds.height + layout.insets.height
+                    let widthToExtends = bounds.width + layout.insets.width
+                    let heightToExtends = max(layoutHeight - container.size.height, 0.0)
+                    
+                    switch layout.alignment {
+                    case .leading:
+                        frame.origin.y = previousComp.frame.origin.y
+                    case .trailing:
+                        frame.origin.y = previousComp.frame.maxY - bounds.height
+                    case .center:
+                        frame.origin.y = previousComp.frame.minY + previousComp.frame.height * 0.5 - bounds.height * 0.5
+                    case .filling:
+                        frame.origin.y = container.size.height * 0.5 - layoutHeight * 0.5 + layout.insets.top
+                    }
+                    
+                    container.extends(size: CGSize(width: widthToExtends, height: heightToExtends))
+                }
+                
                 /// Layout the component related to the previous component on the left.
                 func _layoutOnLeft() {
                     frame.origin.x = previousComp.frame.origin.x - layout.insets.width - bounds.width
-                    frame.origin.y = previousComp.frame.origin.y
+                    _alignVertically()
                 }
                 
                 /// Layout the component related to the previous component on the right.
                 func _layoutOnRight() {
                     frame.origin.x = previousComp.frame.maxX + previousComp.layout.insets.right + layout.insets.left
-                    frame.origin.y = previousComp.frame.origin.y
+                    _alignVertically()
                 }
                 
                 switch position {
@@ -78,20 +98,36 @@ extension ToastView.Component.View {
                         _layoutOnRight()
                     }
                 }
-                
-                container.extends(size: CGSize(width: bounds.width + layout.insets.width,
-                                               height: max(bounds.height - previousComp.frame.height, 0.0)))
             case .vertical(at: let position):
+                /// Align the component horzontally.
+                func _alignHorizontally() {
+                    let layoutWidth = bounds.width + layout.insets.width
+                    let heightToExtends = bounds.height + layout.insets.height
+                    let widthToExtends = max(layoutWidth - container.size.width, 0.0)
+                    
+                    switch layout.alignment {
+                    case .leading:
+                        frame.origin.x = previousComp.frame.origin.x
+                    case .trailing:
+                        frame.origin.x = previousComp.frame.maxX - bounds.width
+                    case .center:
+                        frame.origin.x = previousComp.frame.minX + previousComp.frame.width * 0.5 - bounds.width * 0.5
+                    case .filling:
+                        frame.origin.x = container.size.width * 0.5 - layoutWidth * 0.5 + layout.insets.left
+                    }
+                    
+                    container.extends(size: CGSize(width: widthToExtends, height: heightToExtends))
+                }
                 
                 /// Layout the component related to the previous component on the top.
                 func _layoutOnTop() {
-                    frame.origin.x = previousComp.frame.origin.x
+                    _alignHorizontally()
                     frame.origin.y = previousComp.frame.origin.y - layout.insets.height - bounds.height
                 }
                 
                 /// Layout the component related to the previous component on the bottom.
                 func _layoutOnBottom() {
-                    frame.origin.x = previousComp.frame.origin.x
+                    _alignHorizontally()
                     frame.origin.y = previousComp.frame.maxY + previousComp.layout.insets.bottom + layout.insets.top
                 }
                 
@@ -109,9 +145,6 @@ extension ToastView.Component.View {
                         _layoutOnBottom()
                     }
                 }
-                
-                container.extends(size: CGSize(width: max(bounds.width + layout.insets.width - container.size.width, 0.0),
-                                               height: bounds.height + layout.insets.height))
             }
         }
     }

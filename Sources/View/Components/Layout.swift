@@ -44,9 +44,25 @@ extension ToastView.Component {
             case vertical(at: Vertical)
         }
         
+        // MARK: Alignment.
+        
+        /// The alignment of `ToastComponent` used by the toast component to layout.
+        public enum Alignment: Equatable {
+            /// Align to leading of the related component.
+            case leading
+            /// Align to center of the related component.
+            case center
+            /// Align to trailing of the related component.
+            case trailing
+            /// Fill to align to the related component.
+            case filling
+        }
+        
         /// The insets of the component's edge.
         public var insets: UIEdgeInsets
         /// The preferred layout distribution of `ToastComponent`.
         public var distribution: Distribution
+        /// The alignment of `ToastComponent`.
+        public var alignment: Alignment
     }
 }
