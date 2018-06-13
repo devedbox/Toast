@@ -121,7 +121,7 @@ class ViewController: UIViewController {
             contentView2.style = .translucent(style: .extraLight)
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "alert", style: .plain, target: self, action: #selector(_handleAlert(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "show", style: .plain, target: self, action: #selector(_handleAlert(_:)))
         
         let timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(_handleTimer(_:)), userInfo: nil, repeats: true)
         RunLoop.main.add(timer, forMode: .commonModes)
@@ -134,9 +134,12 @@ class ViewController: UIViewController {
 
     @objc
     private func _handleAlert(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        // let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
+        // alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        // self.present(alert, animated: true, completion: nil)
+        
+        let toast = ToastController()
+        self.present(toast, animated: true, completion: nil)
     }
     
     @objc

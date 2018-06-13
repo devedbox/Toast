@@ -21,6 +21,7 @@
 		DC49C9D520D0111700FF3C1F /* ToastError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49C9D420D0111700FF3C1F /* ToastError.swift */; };
 		DC73326720D0C23F00082AE8 /* misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73326620D0C23F00082AE8 /* misc.swift */; };
 		DC73326920D0CC6C00082AE8 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73326820D0CC6C00082AE8 /* Layout.swift */; };
+		DCB7AA0720D175CE00774846 /* ToastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB7AA0620D175CE00774846 /* ToastController.swift */; };
 		DCE959E420CEC21400E5CC0B /* ToastContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE959E320CEC21400E5CC0B /* ToastContentView.swift */; };
 		DCF5C8C520CD4C8C0097C3C9 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF5C8C420CD4C8C0097C3C9 /* ProgressIndicator.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		DC49C9D420D0111700FF3C1F /* ToastError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastError.swift; sourceTree = "<group>"; };
 		DC73326620D0C23F00082AE8 /* misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = misc.swift; sourceTree = "<group>"; };
 		DC73326820D0CC6C00082AE8 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		DCB7AA0620D175CE00774846 /* ToastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastController.swift; sourceTree = "<group>"; };
 		DCE959E320CEC21400E5CC0B /* ToastContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastContentView.swift; sourceTree = "<group>"; };
 		DCF5C8C420CD4C8C0097C3C9 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				DC05DBBC20CD0EB1000C3B2B /* ToastView.swift */,
+				DCB7AA0620D175CE00774846 /* ToastController.swift */,
 				DCE959E320CEC21400E5CC0B /* ToastContentView.swift */,
 				DC05DBC620CD2F00000C3B2B /* Components */,
 			);
@@ -213,6 +216,7 @@
 				DCF5C8C520CD4C8C0097C3C9 /* ProgressIndicator.swift in Sources */,
 				DCE959E420CEC21400E5CC0B /* ToastContentView.swift in Sources */,
 				DC05DBA820CCEB72000C3B2B /* AppDelegate.swift in Sources */,
+				DCB7AA0720D175CE00774846 /* ToastController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
