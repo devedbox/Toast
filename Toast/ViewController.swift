@@ -27,14 +27,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        toastView.tintColor = .orange
+        toastView.tintColor = UIColor(white: 1.0, alpha: 0.7)
+        toastView.opacity = 0.3
         view.addSubview(toastView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        toastView.frame = CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: view.bounds.height * 0.5))
+        let navigationBarFrame = navigationController?.navigationBar.frame
+        toastView.frame = CGRect(origin: CGPoint(x: 0.0, y: navigationBarFrame?.maxY ?? 0.0),
+                                 size: CGSize(width: view.bounds.width, height: (view.bounds.height - (navigationBarFrame?.height ?? 0.0)) * 0.5))
         let indicator = ToastView.Component.ActivityIndicator.normal
         indicator.layout.distribution = .vertical(at: .top)
         let indicator2 = ToastView.Component.ActivityIndicator.breachedRing
@@ -50,7 +53,7 @@ class ViewController: UIViewController {
         // indicator3.frame.size = CGSize(width: 120.0, height: 120.0)
         toastView.add(component: indicator3)
         
-        toastView.contentView.style = .coloured(colors: [.blue, .purple])
+        toastView.contentView.style = .coloured(colors: [.purple, .blue])
         
         let normalIndicator = ToastView.Component.ActivityIndicator.normal
         normalIndicator.frame.origin.x = 100.0
