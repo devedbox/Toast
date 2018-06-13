@@ -140,9 +140,9 @@ extension ToastView.ContentView {
         switch style {
         case .translucent(style: let translucentStyle):
             _effectView = _effectView(for: translucentStyle)
-            addSubview(_effectView!)
+            insertSubview(_effectView!, at: 0)
         case .coloured(colors: let colors):
-            layer.addSublayer(_gradientLayer)
+            layer.insertSublayer(_gradientLayer, at: 0)
             _gradientLayer.colors = colors.map { $0.cgColor }
         default: break
         }
