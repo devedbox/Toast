@@ -12,7 +12,7 @@ import UIKit
 
 extension ToastView.Component {
     /// The indicator for activity like `UIActivityIndicator` do.
-    public final class ActivityIndicator: UIView {
+    public final class ActivityIndicator: View {
         
         // MARK: Style.
         

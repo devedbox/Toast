@@ -12,7 +12,7 @@ import UIKit
 
 extension ToastView.Component {
     /// The indicator view for progress of a task.
-    public final class ProgressIndicator: UIView {
+    public final class ProgressIndicator: View {
         
         // MARK: Style.
         

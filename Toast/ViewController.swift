@@ -36,17 +36,22 @@ class ViewController: UIViewController {
         
         toastView.frame = CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: view.bounds.height * 0.5))
         let indicator = ToastView.Component.ActivityIndicator.normal
+        indicator.layout.preferredDirection = .vertical(at: .top)
+        let indicator2 = ToastView.Component.ActivityIndicator.breachedRing
+        indicator2.layout.preferredDirection = .horizontal(at: .right)
         toastView.add(component: indicator)
+        toastView.add(component: indicator2)
         indicator.isAnimating = true
+        indicator2.isAnimating = true
         
         let normalIndicator = ToastView.Component.ActivityIndicator.normal
         normalIndicator.frame.origin.x = 100.0
         normalIndicator.frame.origin.y = 100.0
-        self.view.addSubview(normalIndicator)
+        self.view.insertSubview(normalIndicator, at: 0)
         let breachedIndicator = ToastView.Component.ActivityIndicator.breachedRing
         breachedIndicator.frame.origin.x = 100.0
         breachedIndicator.frame.origin.y = 150.0
-        self.view.addSubview(breachedIndicator)
+        self.view.insertSubview(breachedIndicator, at: 0)
         
         normalIndicator.isAnimating = true
         breachedIndicator.isAnimating = true
@@ -54,41 +59,41 @@ class ViewController: UIViewController {
         let barProgress = ToastView.Component.ProgressIndicator.horizontalBar
         barProgress.frame.origin.x = 100.0
         barProgress.frame.origin.y = 200.0
-        view.addSubview(barProgress)
+        view.insertSubview(barProgress, at: 0)
         self.barProgress = barProgress
         barProgress.progress = 0.2
         
         let pieProgress = ToastView.Component.ProgressIndicator.pie
         pieProgress.frame.origin.x = 100.0
         pieProgress.frame.origin.y = 250.0
-        view.addSubview(pieProgress)
+        view.insertSubview(pieProgress, at: 0)
         self.pieProgress = pieProgress
         pieProgress.progress = 0.8
         
         let ringProgress = ToastView.Component.ProgressIndicator.ring
         ringProgress.frame.origin.x = 100.0
         ringProgress.frame.origin.y = 300.0
-        view.addSubview(ringProgress)
+        view.insertSubview(ringProgress, at: 0)
         self.ringProgress = ringProgress
         ringProgress.progress = 0.4
         
         let colourredProgress = ToastView.Component.ProgressIndicator.colouredBar
         colourredProgress.frame.origin.x = 100.0
         colourredProgress.frame.origin.y = 350.0
-        view.addSubview(colourredProgress)
+        view.insertSubview(colourredProgress, at: 0)
         self.colouredProgress = colourredProgress
         colourredProgress.progress = 1.0
         
         let contentView = ToastView.ContentView(frame: CGRect(origin: CGPoint(x: 100.0, y: 380.0), size: CGSize(width: 37.0, height: 37.0)))
-        view.addSubview(contentView)
+        view.insertSubview(contentView, at: 0)
         contentView.style = .normal(opacity: 0.1)
         
         let contentView1 = ToastView.ContentView(frame: CGRect(origin: CGPoint(x: 100.0, y: 430.0), size: CGSize(width: 37.0, height: 37.0)))
-        view.addSubview(contentView1)
+        view.insertSubview(contentView1, at: 0)
         contentView1.style = .coloured(colors: [.blue, .green])
         
         let contentView2 = ToastView.ContentView(frame: CGRect(origin: CGPoint(x: 100.0, y: 480.0), size: CGSize(width: 37.0, height: 37.0)))
-        view.addSubview(contentView2)
+        view.insertSubview(contentView2, at: 0)
         contentView2.style = .translucent(style: .dark)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

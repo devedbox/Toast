@@ -26,8 +26,13 @@ public enum ToastComponentOrder {
 /// A ptotocol represents the conforming types can perform like the component of a toast view
 /// of `ToastView`.
 public protocol ToastComponent: class {
-    /// Layout content insets of the component.
-    var insets: UIEdgeInsets { get }
+    
+    /// Returns the frame of the receiver component.
+    var frame: CGRect { get }
+    
+    /// The layout info of the component.
+    var layout: ToastView.Component.Layout { get }
+    
     /// Layout the frame of the receiver in a given container of `ToastComponentsContainer`.
     func layout(in container: ToastComponentsContainer, provider: ToastComponentsProvider)
 }
@@ -36,9 +41,12 @@ public protocol ToastComponent: class {
 
 /// A protocol represents the container for instances of `ToastComponent`.
 public protocol ToastComponentsContainer {
+    
     /// The content size of the container.
-//    var size: CGSize { get set }
-    func update(size: CGSize)
+    var size: CGSize { get }
+    
+    /// Extends the layout bounds of the container with a given size.
+    func extends(size: CGSize)
 }
 
 // MARK: - ToastComponentsProvider.
@@ -123,30 +131,5 @@ extension ToastComponentsProvider {
         }
         
         return Array(components[components.index(after: index)..<components.endIndex])
-    }
-}
-
-// MARK: - ToastComponent.
-
-extension ToastView.Component.ActivityIndicator: ToastComponent {
-    public var insets: UIEdgeInsets {
-        return UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)
-    }
-    
-    public func layout(in container: ToastComponentsContainer, provider: ToastComponentsProvider) {
-        guard let order = try? provider.order(for: self) else {
-            return
-        }
-        
-        switch order {
-        case .start:
-            frame.origin.x = insets.left
-            frame.origin.y = insets.top
-            
-            container.update(size: CGSize(width: bounds.width + insets.left + insets.right,
-                                          height: bounds.height + insets.top + insets.bottom))
-        case .end: break
-        case .middle(index: let index): break
-        }
     }
 }
