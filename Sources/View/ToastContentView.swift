@@ -31,7 +31,7 @@ extension ToastView {
         /// The gradient layer for the coloured style.
         private lazy var _gradientLayer = CAGradientLayer()
         /// The style of the instance of `ContentView`.
-        public var style: Style = .normal(opacity: 0.3) {
+        public var style: Style = .normal(opacity: 0.89) {
             willSet {
                 _clearPreviousState()
             }
@@ -79,7 +79,7 @@ extension ToastView {
             
             switch style {
             case .normal(opacity: let opacity):
-                context.setFillColor(gray: 0.0, alpha: opacity)
+                context.setFillColor(UIColor(white: 0.0, alpha: opacity).cgColor)
             default:
                 context.setFillColor(UIColor.clear.cgColor)
             }
@@ -110,23 +110,6 @@ extension ToastView.ContentView {
             return nil
         }
         return _gradientLayer
-    }
-}
-
-// MARK: - ToastComponentsContainer.
-
-extension ToastView.ContentView: ToastComponentsContainer {
-    /// The content size of `ToastView.ContentView`.
-    public var size: CGSize {
-        get {
-            return bounds.size
-        }
-        set {
-            bounds.size = newValue
-        }
-    }
-    public func update(size: CGSize) {
-        self.size = size
     }
 }
 
@@ -163,5 +146,19 @@ extension ToastView.ContentView {
             _gradientLayer.colors = colors.map { $0.cgColor }
         default: break
         }
+    }
+}
+
+// MARK: - ToastComponentsContainer.
+
+extension ToastView.ContentView: ToastComponentsContainer {
+    /// The content size of `ToastView.ContentView`.
+    public var size: CGSize {
+        return bounds.size
+    }
+    /// Update the layout bounds of the container with a given size.
+    public func extends(size: CGSize) {
+        bounds.size = CGSize(width: bounds.width + size.width,
+                             height: bounds.height + size.height)
     }
 }
