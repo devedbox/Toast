@@ -22,7 +22,7 @@ extension ToastView.Component {
     /// The base view of the component view.
     open class View: UIView, ToastComponent {
         /// The layout info of the component.
-        open var layout = ToastView.Component.Layout(insets: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+        open var layout = ToastView.Component.Layout(insets: UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0),
                                                      distribution: .vertical(at: .bottom),
                                                      alignment: .center)
     }
@@ -46,7 +46,7 @@ extension ToastView.Component {
         /// Should treat tint color as text color.
         public var shouldTreatTintColorAsTextColor: Bool = true
         /// The layout info of the component.
-        open var layout = ToastView.Component.Layout(insets: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+        open var layout = ToastView.Component.Layout(insets: UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0),
                                                      distribution: .vertical(at: .bottom),
                                                      alignment: .center)
         
