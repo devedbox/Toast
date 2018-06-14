@@ -121,6 +121,14 @@ class ViewController: UIViewController {
             contentView2.style = .translucent(style: .extraLight)
         }
         
+        let success = ToastView.Component.ResultIndicator.success
+        success.frame.origin = CGPoint(x: 100.0, y: 530.0)
+        view.insertSubview(success, at: 0)
+        
+        let error = ToastView.Component.ResultIndicator.error
+        error.frame.origin = CGPoint(x: 100.0, y: 580.0)
+        view.insertSubview(error, at: 0)
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "show", style: .plain, target: self, action: #selector(_handleAlert(_:)))
         
         let timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(_handleTimer(_:)), userInfo: nil, repeats: true)
@@ -145,7 +153,10 @@ class ViewController: UIViewController {
         textLabel.font = UIFont.boldSystemFont(ofSize: 14)
         textLabel.text = "加载中..."
         textLabel.layout.insets = UIEdgeInsets(top: 0.0, left: 12.0, bottom: 10.0, right: 12.0)
-        let toast = ToastController(components: [indicator, textLabel])
+        let toast = ToastController(components: [ToastView.Component.ResultIndicator.error,
+                                                 // ToastView.Component.ResultIndicator.success,
+                                                 // indicator,
+                                                 textLabel])
         toast.toastView.tintColor = .white
         toast.toastView.isTouchingThroughEnabled = true
         // toast.toastView.contentView.style = toastView.contentView.style
