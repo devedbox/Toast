@@ -19,6 +19,8 @@ public final class ToastView: UIView {
     private var _components: [UIView & ToastComponent] = []
     /// Opacity of the diming background of the toast view. Default is 0.3.
     public var opacity: CGFloat = 0.0
+    /// True to ignore the hit test view of `ToastView` when the hit point is outside the content view. Default is false.
+    public var isTouchingThroughEnabled: Bool = false
     /// Overrides the background color of the toast view to ignore the background color.
     public override var backgroundColor: UIColor? {
         get {
@@ -58,6 +60,18 @@ public final class ToastView: UIView {
     }
     
     // MARK: Overrides.
+    
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if isTouchingThroughEnabled {
+            if _contentView.frame.contains(point) {
+                return _contentView
+            } else {
+                return nil
+            }
+        } else {
+            return super.hitTest(point, with: event)
+        }
+    }
     
     /// Draws the background of the toast view.
     public override func draw(_ rect: CGRect) {
