@@ -58,7 +58,7 @@ class ViewController: UIViewController {
         textLabel.text = "asdaidjaidjaiodjaiodjaoidhaoidbaodhaoisdhaiosdhaodhaoidhaiodhsoaihdddddddddddddddddddhdaoidhsiaohdioahdsoiahsoidhaiohsdahdaoihsdioahiosdhoaihdiohaiohdioahds"
         toastView.add(component: textLabel)
         
-        toastView.contentView.style = .coloured(colors: [.purple, .blue])
+        toastView.contentView.style = .coloured(colors: [UIColor.purple.withAlphaComponent(0.79), UIColor.blue.withAlphaComponent(0.89)])
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.toastView.remove(component: textLabel)
         }
@@ -147,6 +147,7 @@ class ViewController: UIViewController {
         textLabel.layout.insets = UIEdgeInsets(top: 0.0, left: 12.0, bottom: 10.0, right: 12.0)
         let toast = ToastController(components: [indicator, textLabel])
         toast.toastView.tintColor = .white
+        toast.toastView.isTouchingThroughEnabled = true
         // toast.toastView.contentView.style = toastView.contentView.style
         toast.show(in: self, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
