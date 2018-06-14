@@ -28,16 +28,13 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         toastView.tintColor = UIColor(white: 1.0, alpha: 0.7)
-        toastView.opacity = 0.3
         view.addSubview(toastView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let navigationBarFrame = navigationController?.navigationBar.frame
-        toastView.frame = CGRect(origin: CGPoint(x: 0.0, y: navigationBarFrame?.maxY ?? 0.0),
-                                 size: CGSize(width: view.bounds.width, height: (view.bounds.height - (navigationBarFrame?.height ?? 0.0)) * 0.5))
+        toastView.frame = view.bounds
         let indicator = ToastView.Component.ActivityIndicator.normal
         indicator.layout.distribution = .vertical(at: .top)
         let indicator2 = ToastView.Component.ActivityIndicator.breachedRing
@@ -146,24 +143,9 @@ class ViewController: UIViewController {
         // alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         // self.present(alert, animated: true, completion: nil)
         
-        let indicator = ToastView.Component.ActivityIndicator.breachedRing
-        indicator.isAnimating = true
-        let textLabel = ToastView.Component.Label()
-        textLabel.numberOfLines = 0
-        textLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        textLabel.text = "加载中..."
-        textLabel.layout.insets = UIEdgeInsets(top: 0.0, left: 12.0, bottom: 10.0, right: 12.0)
-        let toast = ToastController(components: [ToastView.Component.ResultIndicator.success,
-                                                 // ToastView.Component.ResultIndicator.success,
-                                                 // indicator,
-                                                 textLabel])
+        let toast = ToastController.activity(.breachedRing, message: "加载中...")
         toast.toastView.tintColor = .white
-        toast.toastView.isTouchingThroughEnabled = true
-        toast.toastView.contentView.style = toastView.contentView.style
-        toast.show(in: self, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            toast.dismiss(animated: true, completion: nil)
-        }
+        toast.show(in: self, animated: true, duration: 1.5)
     }
     
     @objc
