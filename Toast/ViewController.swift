@@ -159,7 +159,7 @@ class ViewController: UIViewController {
                                                  textLabel])
         toast.toastView.tintColor = .white
         toast.toastView.isTouchingThroughEnabled = true
-        // toast.toastView.contentView.style = toastView.contentView.style
+        toast.toastView.contentView.style = toastView.contentView.style
         toast.show(in: self, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             toast.dismiss(animated: true, completion: nil)
