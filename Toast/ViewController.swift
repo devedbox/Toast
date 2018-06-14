@@ -148,7 +148,7 @@ class ViewController: UIViewController {
         let toast = ToastController(components: [indicator, textLabel])
         toast.toastView.tintColor = .white
         // toast.toastView.contentView.style = toastView.contentView.style
-        self.present(toast, animated: true, completion: nil)
+        toast.show(in: self, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             toast.dismiss(animated: true, completion: nil)
         }
