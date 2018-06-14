@@ -83,6 +83,25 @@ extension ToastView.Component {
     }
 }
 
+extension ToastView.Component.Label {
+    /// Returns the title label for toast.
+    public class func title(_ string: String) -> ToastView.Component.Label {
+        let label = ToastView.Component.Label()
+        label.font = UIFont.boldSystemFont(ofSize: 14.0)
+        label.numberOfLines = 0
+        label.text = string
+        return label
+    }
+    /// Returns the detail label for toast.
+    public class func detail(_ string: String) -> ToastView.Component.Label {
+        let label = ToastView.Component.Label()
+        label.font = UIFont.boldSystemFont(ofSize: 12.0)
+        label.numberOfLines = 0
+        label.text = string
+        return label
+    }
+}
+
 // MARK: - Layout.
 
 extension ToastView.Component.Label {
