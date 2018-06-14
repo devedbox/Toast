@@ -9,5 +9,6 @@
 /// A protocol represents the conforming type can act like a toast to show message as a view masking on
 /// a host view.
 public protocol ToastProtocol {
-    
+    /// Returns the components of toast.
+    var components: [ToastComponent] { get }
 }
