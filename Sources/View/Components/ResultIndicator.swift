@@ -119,7 +119,7 @@ extension ToastView.Component.ResultIndicator {
     /// Returns the result indicator of success style.
     public class var success: ToastView.Component.ResultIndicator {
         let indicator = ToastView.Component.ResultIndicator(style: .success)
-        indicator.width = 32.0
+        indicator.width = 28.0
         return indicator
     }
     

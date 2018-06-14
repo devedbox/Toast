@@ -153,7 +153,7 @@ class ViewController: UIViewController {
         textLabel.font = UIFont.boldSystemFont(ofSize: 14)
         textLabel.text = "加载中..."
         textLabel.layout.insets = UIEdgeInsets(top: 0.0, left: 12.0, bottom: 10.0, right: 12.0)
-        let toast = ToastController(components: [ToastView.Component.ResultIndicator.error,
+        let toast = ToastController(components: [ToastView.Component.ResultIndicator.success,
                                                  // ToastView.Component.ResultIndicator.success,
                                                  // indicator,
                                                  textLabel])
