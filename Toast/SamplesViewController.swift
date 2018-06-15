@@ -85,16 +85,16 @@ extension SamplesViewController {
     private func _showSuccess() {
         let toast = ToastController.result(.success, message: "操作成功")
         toast.animator = animator
-        toast.toastView.tintColor = tintColor
-        toast.toastView.contentView.style = .translucent(style: .dark)
+        toast.toastView.tintColor = .black
+        toast.toastView.contentView.style = .translucent(style: .extraLight)
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
     private func _showError() {
         let toast = ToastController.result(.error, message: "操作失败")
         toast.animator = animator
-        toast.toastView.tintColor = tintColor
-        toast.toastView.contentView.style = .translucent(style: .dark)
+        toast.toastView.tintColor = .black
+        toast.toastView.contentView.style = .translucent(style: .extraLight)
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
