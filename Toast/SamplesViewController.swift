@@ -61,36 +61,46 @@ extension SamplesViewController {
     private func _showTextOnly() {
         let toast = ToastController.message("Some message.")
         toast.toastView.tintColor = tintColor
+        toast.toastView.contentView.style = .coloured(colors: [.purple, .blue])
+        toast.toastView.contentView.gradientLayer?.startPoint = CGPoint(x: 0.5, y: -0.5)
+        toast.toastView.contentView.gradientLayer?.endPoint = CGPoint(x: 0.5, y: 1.5)
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
     private func _showTextAndDetail() {
         let toast = ToastController.message("Some message", detail: "Some detail message.")
         toast.toastView.tintColor = tintColor
+        toast.toastView.contentView.style = .coloured(colors: [.orange, .red])
+        toast.toastView.contentView.gradientLayer?.startPoint = CGPoint(x: 0.5, y: -0.5)
+        toast.toastView.contentView.gradientLayer?.endPoint = CGPoint(x: 0.5, y: 1.5)
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
     private func _showSuccess() {
         let toast = ToastController.result(.success, message: "操作成功")
         toast.toastView.tintColor = tintColor
+        toast.toastView.contentView.style = .translucent(style: .dark)
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
     private func _showError() {
         let toast = ToastController.result(.error, message: "操作失败")
         toast.toastView.tintColor = tintColor
+        toast.toastView.contentView.style = .translucent(style: .dark)
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
     private func _showNormalAtivity() {
         let toast = ToastController.activity(.normal, message: "加载中...")
         toast.toastView.tintColor = tintColor
+        toast.toastView.contentView.style = .normal(opacity: 0.7)
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
     private func _showBreachedRingActivity() {
         let toast = ToastController.activity(.breachedRing, message: "加载中...")
         toast.toastView.tintColor = tintColor
+        toast.toastView.contentView.style = .normal(opacity: 0.7)
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
