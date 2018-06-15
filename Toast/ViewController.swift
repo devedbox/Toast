@@ -143,7 +143,7 @@ class ViewController: UIViewController {
         // alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         // self.present(alert, animated: true, completion: nil)
         
-        let toast = ToastController.activity(.breachedRing, message: "加载中...")
+        let toast = ToastController.activity(.breachedRing, message: "加载中...", detail: "Detail")
         toast.toastView.tintColor = .white
         toast.show(in: self, animated: true, duration: 1.5)
     }

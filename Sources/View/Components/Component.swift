@@ -73,6 +73,13 @@ extension ToastView.Component {
         
         // MARK: Overrides.
         
+        public override func didMoveToSuperview() {
+            super.didMoveToSuperview()
+            
+            let tintColor = self.tintColor
+            self.tintColor = tintColor
+        }
+        
         public override func tintColorDidChange() {
             super.tintColorDidChange()
             
@@ -95,7 +102,7 @@ extension ToastView.Component.Label {
     /// Returns the detail label for toast.
     public class func detail(_ string: String) -> ToastView.Component.Label {
         let label = ToastView.Component.Label()
-        label.font = UIFont.boldSystemFont(ofSize: 12.0)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.numberOfLines = 0
         label.text = string
         return label

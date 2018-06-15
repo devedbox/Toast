@@ -64,6 +64,19 @@ public final class ToastController: UIViewController {
 // MARK: - Public.
 
 extension ToastController {
+    /// Progress value of the toast if any. Get the value of progress will return the first progress indicator's value of
+    /// the toast if any, and set the value of progress will set each progress indicator of the toast.
+    public var progress: CGFloat? {
+        get {
+            return toastView.contentView.subviews.compactMap { $0 as? ToastView.Component.ProgressIndicator }.first?.progress
+        }
+        set {
+            toastView.contentView.subviews.forEach { ($0 as? ToastView.Component.ProgressIndicator)?.progress = newValue ?? 0.0 }
+        }
+    }
+}
+
+extension ToastController {
     /// Show the toast controller in a given view controller by presenting the toast as a modal view controller.
     ///
     /// - Parameter viewController: The view controller to show in.
@@ -111,57 +124,121 @@ extension ToastController {
     ///
     /// - Returns: An activity toast.
     public class func message(_ message: String, detail: String? = nil) -> ToastController {
-        let components: [(UIView & ToastComponent)?] =
-            [message.isEmpty ? nil : ToastView.Component.Label.title(message),
-             (detail?.isEmpty ?? true) ? nil : ToastView.Component.Label.detail(detail!)].map { $0?.layout.insets.top = 0.0; return $0 }
+        let components: [(UIView & ToastComponent)] = [
+            message.isEmpty ? nil : ToastView.Component.Label.title(message),
+            (detail?.isEmpty ?? true) ? nil : ToastView.Component.Label.detail(detail!)
+        ].compactMap { $0 }
         
-        return ToastController(components: components.compactMap { $0 })
+        if components.count == 2 {
+            components.first?.layout.insets.bottom = 0.0
+            components.last?.layout.insets.top = 8.0
+        }
+        
+        return ToastController(components: components)
     }
     
     /// Return a activity toast contains an activity indicator, title and detail messages.
     ///
-    /// - Parameter activityIndicator: The activity indicator of `ToastView.Component.ActivityIndicator`.
+    /// - Parameter activityIndicatorStyle: The activity indicator style of `ToastView.Component.ActivityIndicatorStyle`.
     /// - Parameter message: The title message content.
     /// - Parameter detail: The detail message content.
     ///
     /// - Returns: An activity toast.
-    public class func activity(_ activityIndicator: ToastView.Component.ActivityIndicator = .normal, message: String, detail: String? = nil) -> ToastController {
+    public class func activity(_ activityIndicatorStyle: ToastView.Component.ActivityIndicator.Style = .normal,
+                               message: String,
+                               detail: String? = nil) -> ToastController {
+        
+        var activityIndicator: ToastView.Component.ActivityIndicator
+        
+        switch activityIndicatorStyle {
+        case .normal:
+            activityIndicator = .normal
+        case .breachedRing:
+            activityIndicator = .breachedRing
+        }
+        
         activityIndicator.isAnimating = true
+        activityIndicator.layout.insets.bottom = 0.0
         
-        let components: [(UIView & ToastComponent)?] =
-            [message.isEmpty ? nil : ToastView.Component.Label.title(message),
-             (detail?.isEmpty ?? true) ? nil : ToastView.Component.Label.detail(detail!)].map { $0?.layout.insets.top = 0.0; return $0 }
+        let components: [(UIView & ToastComponent)?] = [activityIndicator] + _labels(with: message, detail: detail)
         
-        return ToastController(components: [activityIndicator] + components.compactMap { $0 })
+        return ToastController(components: components.compactMap { $0 })
     }
     
     /// Returns a progress toast contains a progress indicator, title and detail message.
     ///
-    /// - Parameter progressIndicator: The progress indicator of `ToastView.Component.ProgressIndicator`.
+    /// - Parameter progressIndicatorStyle: The progress indicator style of `ToastView.Component.ProgressIndicator.Style`.
     /// - Parameter message: The title message content.
     /// - Parameter detail: The detail message content.
     ///
     /// - Returns: A progress toast.
-    public class func progress(_ progressIndicator: ToastView.Component.ProgressIndicator = .pie, message: String, detail: String? = nil) -> ToastController {
-        let components: [(UIView & ToastComponent)?] =
-            [message.isEmpty ? nil : ToastView.Component.Label.title(message),
-             (detail?.isEmpty ?? true) ? nil : ToastView.Component.Label.detail(detail!)].map { $0?.layout.insets.top = 0.0; return $0 }
+    public class func progress(_ progressIndicatorStyle: ToastView.Component.ProgressIndicator.Style = .pie,
+                               message: String,
+                               detail: String? = nil) -> ToastController {
         
-        return ToastController(components: [progressIndicator] + components.compactMap { $0 })
+        var progressIndicator: ToastView.Component.ProgressIndicator
+        
+        switch progressIndicatorStyle {
+        case .horizontalBar:
+            progressIndicator = .horizontalBar
+        case .pie:
+            progressIndicator = .pie
+        case .ring:
+            progressIndicator = .ring
+        case .colouredBar:
+            progressIndicator = .colouredBar
+        }
+        
+        progressIndicator.layout.insets.bottom = 0.0
+        
+        let components: [(UIView & ToastComponent)?] = [progressIndicator] + _labels(with: message, detail: detail)
+        
+        return ToastController(components: components.compactMap { $0 })
     }
     
     /// Returns a result toast contains a result indicator, title and detail message.
     ///
-    /// - Parameter resultIndicator: The progress indicator of `ToastView.Component.ProgressIndicator`.
+    /// - Parameter resultIndicatorStyle: The result indicator style of `ToastView.Component.ProgressIndicator.Style`.
     /// - Parameter message: The title message content.
     /// - Parameter detail: The detail message content.
     ///
     /// - Returns: A result toast.
-    public class func result(_ resultIndicator: ToastView.Component.ResultIndicator = .success, message: String, detail: String? = nil) -> ToastController {
-        let components: [(UIView & ToastComponent)?] =
-            [message.isEmpty ? nil : ToastView.Component.Label.title(message),
-             (detail?.isEmpty ?? true) ? nil : ToastView.Component.Label.detail(detail!)].map { $0?.layout.insets.top = 0.0; return $0 }
+    public class func result(_ resultIndicatorStyle: ToastView.Component.ResultIndicator.Style = .success,
+                             message: String,
+                             detail: String? = nil) -> ToastController {
         
-        return ToastController(components: [resultIndicator] + components.compactMap { $0 })
+        var resultIndicator: ToastView.Component.ResultIndicator
+        
+        switch resultIndicatorStyle {
+        case .success:
+            resultIndicator = .success
+        case .error:
+            resultIndicator = .error
+        }
+        
+        resultIndicator.layout.insets.bottom = 0.0
+        
+        let components: [(UIView & ToastComponent)?] = [resultIndicator] + _labels(with: message, detail: detail)
+        
+        return ToastController(components: components.compactMap { $0 })
+    }
+}
+
+// MARK: - Private.
+
+extension ToastController {
+    /// Returns the message label and detail message label with a closing margin insets.
+    private class func _labels(with message: String, detail: String?) -> [ToastView.Component.Label?] {
+        let titleLabel = message.isEmpty ? nil : ToastView.Component.Label.title(message)
+        titleLabel?.layout.insets.top = 8.0
+        
+        let detailLabel = (detail?.isEmpty ?? true) ? nil : ToastView.Component.Label.detail(detail!)
+        detailLabel?.layout.insets.top = 8.0
+        
+        if detailLabel != nil {
+            titleLabel?.layout.insets.bottom = 0.0
+        }
+        
+        return [titleLabel, detailLabel]
     }
 }

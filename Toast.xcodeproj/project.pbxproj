@@ -22,6 +22,7 @@
 		DC73326720D0C23F00082AE8 /* misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73326620D0C23F00082AE8 /* misc.swift */; };
 		DC73326920D0CC6C00082AE8 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73326820D0CC6C00082AE8 /* Layout.swift */; };
 		DC73326B20D23FAE00082AE8 /* ResultIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73326A20D23FAE00082AE8 /* ResultIndicator.swift */; };
+		DC73326F20D3656F00082AE8 /* SamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73326E20D3656F00082AE8 /* SamplesViewController.swift */; };
 		DCB7AA0720D175CE00774846 /* ToastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB7AA0620D175CE00774846 /* ToastController.swift */; };
 		DCE959E420CEC21400E5CC0B /* ToastContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE959E320CEC21400E5CC0B /* ToastContentView.swift */; };
 		DCF5C8C520CD4C8C0097C3C9 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF5C8C420CD4C8C0097C3C9 /* ProgressIndicator.swift */; };
@@ -45,6 +46,7 @@
 		DC73326620D0C23F00082AE8 /* misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = misc.swift; sourceTree = "<group>"; };
 		DC73326820D0CC6C00082AE8 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		DC73326A20D23FAE00082AE8 /* ResultIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultIndicator.swift; sourceTree = "<group>"; };
+		DC73326E20D3656F00082AE8 /* SamplesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplesViewController.swift; sourceTree = "<group>"; };
 		DCB7AA0620D175CE00774846 /* ToastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastController.swift; sourceTree = "<group>"; };
 		DCE959E320CEC21400E5CC0B /* ToastContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastContentView.swift; sourceTree = "<group>"; };
 		DCF5C8C420CD4C8C0097C3C9 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				DC05DBA720CCEB72000C3B2B /* AppDelegate.swift */,
 				DC05DBA920CCEB72000C3B2B /* ViewController.swift */,
+				DC73326E20D3656F00082AE8 /* SamplesViewController.swift */,
 				DC05DBAB20CCEB72000C3B2B /* Main.storyboard */,
 				DC05DBAE20CCEB73000C3B2B /* Assets.xcassets */,
 				DC05DBB020CCEB73000C3B2B /* LaunchScreen.storyboard */,
@@ -216,6 +219,7 @@
 				DC73326B20D23FAE00082AE8 /* ResultIndicator.swift in Sources */,
 				DC05DBC820CD2F68000C3B2B /* ActivityIndicator.swift in Sources */,
 				DC05DBC520CD2D46000C3B2B /* ToastComponent.swift in Sources */,
+				DC73326F20D3656F00082AE8 /* SamplesViewController.swift in Sources */,
 				DC05DBC320CD0F13000C3B2B /* ToastProtocol.swift in Sources */,
 				DCF5C8C520CD4C8C0097C3C9 /* ProgressIndicator.swift in Sources */,
 				DCE959E420CEC21400E5CC0B /* ToastContentView.swift in Sources */,
