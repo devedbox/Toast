@@ -30,31 +30,6 @@ class ViewController: UIViewController {
         toastView.tintColor = UIColor(white: 1.0, alpha: 0.7)
         view.addSubview(toastView)
         
-        let indicator = ToastView.Component.ActivityIndicator.normal
-        indicator.layout.distribution = .vertical(at: .top)
-        let indicator2 = ToastView.Component.ActivityIndicator.breachedRing
-        indicator2.layout.distribution = .vertical(at: .bottom)
-        toastView.add(component: indicator)
-        toastView.add(component: indicator2)
-        indicator.isAnimating = true
-        indicator2.isAnimating = true
-        let indicator3 = ToastView.Component.ProgressIndicator.pie
-        indicator3.progress = 0.6
-        indicator3.layout.distribution = .vertical(at: .top)
-        // indicator3.layout.alignment = .trailing
-        // indicator3.frame.size = CGSize(width: 120.0, height: 120.0)
-        toastView.add(component: indicator3)
-        
-        let textLabel = ToastView.Component.Label()
-        textLabel.numberOfLines = 0
-        textLabel.text = "asdaidjaidjaiodjaiodjaoidhaoidbaodhaoisdhaiosdhaodhaoidhaiodhsoaihdddddddddddddddddddhdaoidhsiaohdioahdsoiahsoidhaiohsdahdaoihsdioahiosdhoaihdiohaiohdioahds"
-        toastView.add(component: textLabel)
-        
-        toastView.contentView.style = .coloured(colors: [UIColor.purple.withAlphaComponent(0.79), UIColor.blue.withAlphaComponent(0.89)])
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.toastView.remove(component: textLabel)
-        }
-        
         let normalIndicator = ToastView.Component.ActivityIndicator.normal
         normalIndicator.frame.origin.x = 100.0
         normalIndicator.frame.origin.y = 100.0
@@ -131,6 +106,42 @@ class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         toastView.frame = view.bounds
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let indicator = ToastView.Component.ActivityIndicator.normal
+        indicator.layout.distribution = .vertical(at: .top)
+        indicator.isAnimating = true
+        toastView.add(component: indicator, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            let indicator2 = ToastView.Component.ActivityIndicator.breachedRing
+            indicator2.layout.distribution = .vertical(at: .bottom)
+            indicator2.isAnimating = true
+            self.toastView.add(component: indicator2, animated: true)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                let indicator3 = ToastView.Component.ProgressIndicator.pie
+                indicator3.progress = 0.6
+                indicator3.layout.distribution = .vertical(at: .top)
+                self.toastView.add(component: indicator3, animated: true)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    let textLabel = ToastView.Component.Label()
+                    textLabel.numberOfLines = 0
+                    textLabel.text = "asdaidjaidjaiodjaiodjaoidhaoidbaodhaoisdhaiosdhaodhaoidhaiodhsoaihdddddddddddddddddddhdaoidhsiaohdioahdsoiahsoidhaiohsdahdaoihsdioahiosdhoaihdiohaiohdioahds"
+                    self.toastView.add(component: textLabel)
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self.toastView.remove(component: textLabel, animated: true)
+                    }
+                }
+            }
+        }
+        
+        toastView.contentView.style = .coloured(colors: [UIColor.purple.withAlphaComponent(0.79), UIColor.blue.withAlphaComponent(0.89)])
     }
 
     override func didReceiveMemoryWarning() {
