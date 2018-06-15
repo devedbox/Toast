@@ -11,7 +11,10 @@ import Foundation
 import Dispatch
 
 public final class ToastController: UIViewController {
-    
+    /// Is showing or dismissing with animation.
+    private var _isAnimated: Bool?
+    /// The animator of the toast controller.
+    public var animator: ToastAnimator = .none
     /// Returns the toast view of the toast controller.
     public var toastView: ToastView! {
         return view as! ToastView
@@ -32,21 +35,30 @@ public final class ToastController: UIViewController {
     }
     
     // MARK: Init.
+    
+    /// Overrides init with the given parameters.
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self._init()
     }
     
+    /// Overrides to init with a decoder.
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self._init()
     }
     
+    /// Creates an insance of `ToastController` with the given components of `[UIView & ToastComponent]`.
+    ///
+    /// - Parameter components: The components shows in the content view of the toast view.
+    /// - Returns: A toast controller.
+    ///
     public convenience init(components: [UIView & ToastComponent]) {
         self.init(nibName: nil, bundle: nil)
         toastView.set(components: components)
     }
     
+    /// Do common initialize.
     private func _init() {
         super.modalTransitionStyle = .crossDissolve
         super.modalPresentationStyle = .overCurrentContext
@@ -54,10 +66,20 @@ public final class ToastController: UIViewController {
     
     // MARK: Overrides.
     
+    /// Load view with the instance of `ToastView`.
     public override func loadView() {
         super.loadView()
         
         view = ToastView(frame: .zero)
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if case let isAnimated? = _isAnimated, isAnimated {
+            animator.animation(toastView, true, isAnimated)
+            _isAnimated = nil
+        }
     }
 }
 
@@ -85,6 +107,7 @@ extension ToastController {
     ///
     public func show(in viewController: UIViewController, animated: Bool, duration: TimeInterval? = nil, completion: (() -> Void)? = nil) {
         viewController.present(self, animated: animated, completion: completion)
+        _isAnimated = animated
         
         if let duration = duration {
             dismiss(animated: animated, after: duration)
@@ -109,6 +132,8 @@ extension ToastController {
     /// - Parameter completion: A completion call back closure when the toast has being dismissed.
     ///
     public override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        animator.animation(toastView, false, flag)
+        
         super.dismiss(animated: flag, completion: completion)
     }
 }
