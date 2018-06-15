@@ -56,6 +56,7 @@ public final class ToastView: UIView {
         
         _contentView.layer.cornerRadius = 2.0
         _contentView.layer.masksToBounds = true
+        
         addSubview(_contentView)
     }
     
@@ -91,8 +92,7 @@ public final class ToastView: UIView {
         
         _layoutContentViews()
         
-        _contentView.frame.origin.x = bounds.width * 0.5 - _contentView.bounds.width * 0.5
-        _contentView.frame.origin.y = bounds.height * 0.5 - _contentView.bounds.height * 0.5
+        _contentView.center = CGPoint(x: bounds.width * 0.5, y: bounds.height * 0.5)
     }
 }
 
