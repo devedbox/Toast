@@ -10,6 +10,12 @@ import UIKit
 
 class SamplesViewController: UITableViewController {
     
+    let tintColor = UIColor.white
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.tintColor = .white
+    }
 }
 
 extension SamplesViewController {
@@ -46,31 +52,37 @@ extension SamplesViewController {
 extension SamplesViewController {
     private func _showTextOnly() {
         let toast = ToastController.message("Some message.")
+        toast.toastView.tintColor = tintColor
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
     private func _showTextAndDetail() {
         let toast = ToastController.message("Some message", detail: "Some detail message.")
+        toast.toastView.tintColor = tintColor
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
     private func _showSuccess() {
         let toast = ToastController.result(.success, message: "操作成功")
+        toast.toastView.tintColor = tintColor
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
     private func _showError() {
         let toast = ToastController.result(.error, message: "操作失败")
+        toast.toastView.tintColor = tintColor
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
     private func _showNormalAtivity() {
         let toast = ToastController.activity(.normal, message: "加载中...")
+        toast.toastView.tintColor = tintColor
         toast.show(in: self, animated: true, duration: 1.5)
     }
     
     private func _showBreachedRingActivity() {
         let toast = ToastController.activity(.breachedRing, message: "加载中...")
+        toast.toastView.tintColor = tintColor
         toast.show(in: self, animated: true, duration: 1.5)
     }
     

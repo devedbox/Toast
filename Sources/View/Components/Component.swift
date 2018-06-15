@@ -71,14 +71,23 @@ extension ToastView.Component {
             }
         }
         
-        // MARK: Overrides.
+        // MARK: Init.
         
-        public override func didMoveToSuperview() {
-            super.didMoveToSuperview()
-            
-            let tintColor = self.tintColor
-            self.tintColor = tintColor
+        public override init(frame: CGRect) {
+            super.init(frame: frame)
+            self._init()
         }
+        
+        public required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            self._init()
+        }
+        
+        private func _init() {
+            super.textColor = self.tintColor
+        }
+        
+        // MARK: Overrides.
         
         public override func tintColorDidChange() {
             super.tintColorDidChange()
