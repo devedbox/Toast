@@ -29,12 +29,7 @@ class ViewController: UIViewController {
         
         toastView.tintColor = UIColor(white: 1.0, alpha: 0.7)
         view.addSubview(toastView)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         
-        toastView.frame = view.bounds
         let indicator = ToastView.Component.ActivityIndicator.normal
         indicator.layout.distribution = .vertical(at: .top)
         let indicator2 = ToastView.Component.ActivityIndicator.breachedRing
@@ -130,6 +125,12 @@ class ViewController: UIViewController {
         
         let timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(_handleTimer(_:)), userInfo: nil, repeats: true)
         RunLoop.main.add(timer, forMode: .commonModes)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        toastView.frame = view.bounds
     }
 
     override func didReceiveMemoryWarning() {
