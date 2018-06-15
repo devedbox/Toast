@@ -74,13 +74,13 @@ extension ToastAnimator {
     public static let drop = ToastAnimator { toastView, isShowing, isAnimated in
         if isAnimated {
             if isShowing {
-                toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: -toastView.contentView.frame.maxY).rotated(by: CGFloat.pi / 12.0)
+                toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: -toastView.bounds.height).rotated(by: CGFloat.pi / 12.0)
                 UIView.animate(withDuration: 0.35, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.9, options: [], animations: {
                     toastView.contentView.transform = .identity
                 }, completion: nil)
             } else {
                 UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.9, options: [], animations: {
-                    toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: toastView.bounds.height - toastView.contentView.frame.minY).rotated(by: -CGFloat.pi / 12.0)
+                    toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: toastView.bounds.height).rotated(by: -CGFloat.pi / 12.0)
                 }, completion: { isFinished in
                     if isFinished {
                         toastView.contentView.transform = .identity
