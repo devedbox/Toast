@@ -81,6 +81,12 @@ public final class ToastController: UIViewController {
             _isAnimated = nil
         }
     }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        view.setNeedsLayout()
+    }
 }
 
 // MARK: - Public.
