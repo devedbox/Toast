@@ -87,9 +87,9 @@
 			children = (
 				DC73326620D0C23F00082AE8 /* misc.swift */,
 				DC49C9D420D0111700FF3C1F /* ToastError.swift */,
-				DCD6C4FF20D3F265007486C1 /* ToastAnimator.swift */,
 				DC05DBC120CD0EE7000C3B2B /* View */,
 				DC05DBC020CD0EDD000C3B2B /* Protocol */,
+				DCD6C4FF20D3F265007486C1 /* ToastAnimator.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
