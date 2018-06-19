@@ -149,23 +149,12 @@ extension ToastController {
 extension ToastController {
     /// Return a message toast contains title and detail messages.
     ///
-    /// - Parameter activityIndicator: The activity indicator of `ToastView.Component.ActivityIndicator`.
     /// - Parameter message: The title message content.
     /// - Parameter detail: The detail message content.
     ///
     /// - Returns: An activity toast.
     public class func message(_ message: String, detail: String? = nil) -> ToastController {
-        let components: [(UIView & ToastComponent)] = [
-            message.isEmpty ? nil : ToastView.Component.Label.title(message),
-            (detail?.isEmpty ?? true) ? nil : ToastView.Component.Label.detail(detail!)
-        ].compactMap { $0 }
-        
-        if components.count == 2 {
-            components.first?.layout.insets.bottom = 0.0
-            components.last?.layout.insets.top = 8.0
-        }
-        
-        return ToastController(components: components)
+        return ToastController(components: Toast.message(message, detail: detail))
     }
     
     /// Return a activity toast contains an activity indicator, title and detail messages.
@@ -179,21 +168,7 @@ extension ToastController {
                                message: String,
                                detail: String? = nil) -> ToastController {
         
-        var activityIndicator: ToastView.Component.ActivityIndicator
-        
-        switch activityIndicatorStyle {
-        case .normal:
-            activityIndicator = .normal
-        case .breachedRing:
-            activityIndicator = .breachedRing
-        }
-        
-        activityIndicator.isAnimating = true
-        activityIndicator.layout.insets.bottom = 0.0
-        
-        let components: [(UIView & ToastComponent)?] = [activityIndicator] + _labels(with: message, detail: detail)
-        
-        return ToastController(components: components.compactMap { $0 })
+        return ToastController(components: Toast.activity(activityIndicatorStyle, message: message, detail: detail))
     }
     
     /// Returns a progress toast contains a progress indicator, title and detail message.
@@ -207,24 +182,7 @@ extension ToastController {
                                message: String,
                                detail: String? = nil) -> ToastController {
         
-        var progressIndicator: ToastView.Component.ProgressIndicator
-        
-        switch progressIndicatorStyle {
-        case .horizontalBar:
-            progressIndicator = .horizontalBar
-        case .pie:
-            progressIndicator = .pie
-        case .ring:
-            progressIndicator = .ring
-        case .colouredBar:
-            progressIndicator = .colouredBar
-        }
-        
-        progressIndicator.layout.insets.bottom = 0.0
-        
-        let components: [(UIView & ToastComponent)?] = [progressIndicator] + _labels(with: message, detail: detail)
-        
-        return ToastController(components: components.compactMap { $0 })
+        return ToastController(components: Toast.progress(progressIndicatorStyle, message: message, detail: detail))
     }
     
     /// Returns a result toast contains a result indicator, title and detail message.
@@ -238,38 +196,6 @@ extension ToastController {
                              message: String,
                              detail: String? = nil) -> ToastController {
         
-        var resultIndicator: ToastView.Component.ResultIndicator
-        
-        switch resultIndicatorStyle {
-        case .success:
-            resultIndicator = .success
-        case .error:
-            resultIndicator = .error
-        }
-        
-        resultIndicator.layout.insets.bottom = 0.0
-        
-        let components: [(UIView & ToastComponent)?] = [resultIndicator] + _labels(with: message, detail: detail)
-        
-        return ToastController(components: components.compactMap { $0 })
-    }
-}
-
-// MARK: - Private.
-
-extension ToastController {
-    /// Returns the message label and detail message label with a closing margin insets.
-    private class func _labels(with message: String, detail: String?) -> [ToastView.Component.Label?] {
-        let titleLabel = message.isEmpty ? nil : ToastView.Component.Label.title(message)
-        titleLabel?.layout.insets.top = 8.0
-        
-        let detailLabel = (detail?.isEmpty ?? true) ? nil : ToastView.Component.Label.detail(detail!)
-        detailLabel?.layout.insets.top = 8.0
-        
-        if detailLabel != nil {
-            titleLabel?.layout.insets.bottom = 0.0
-        }
-        
-        return [titleLabel, detailLabel]
+        return ToastController(components: Toast.result(resultIndicatorStyle, message: message, detail: detail))
     }
 }

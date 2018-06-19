@@ -169,3 +169,126 @@ public func layout(component: ToastComponent, in container: ToastComponentsConta
         }
     }
 }
+
+// MARK: - Components.
+
+/// Return a message toast contains title and detail messages.
+///
+/// - Parameter message: The title message content.
+/// - Parameter detail: The detail message content.
+///
+/// - Returns: Message toast components contain title and detail label.
+public func message(_ message: String, detail: String? = nil) -> [UIView & ToastComponent] {
+    let components: [(UIView & ToastComponent)] = [
+        message.isEmpty ? nil : ToastView.Component.Label.title(message),
+        (detail?.isEmpty ?? true) ? nil : ToastView.Component.Label.detail(detail!)
+        ].compactMap { $0 }
+    
+    if components.count == 2 {
+        components.first?.layout.insets.bottom = 0.0
+        components.last?.layout.insets.top = 8.0
+    }
+    
+    return components
+}
+
+/// Return a activity toast contains an activity indicator, title and detail messages.
+///
+/// - Parameter activityIndicatorStyle: The activity indicator style of `ToastView.Component.ActivityIndicatorStyle`.
+/// - Parameter message: The title message content.
+/// - Parameter detail: The detail message content.
+///
+/// - Returns: Activity toast components contain activity indicator, title and detail label.
+public func activity(_ activityIndicatorStyle: ToastView.Component.ActivityIndicator.Style = .normal,
+                     message: String,
+                     detail: String? = nil) -> [UIView & ToastComponent] {
+    
+    var activityIndicator: ToastView.Component.ActivityIndicator
+    
+    switch activityIndicatorStyle {
+    case .normal:
+        activityIndicator = .normal
+    case .breachedRing:
+        activityIndicator = .breachedRing
+    }
+    
+    activityIndicator.isAnimating = true
+    activityIndicator.layout.insets.bottom = 0.0
+    
+    let components: [(UIView & ToastComponent)?] = [activityIndicator] + _labels(with: message, detail: detail)
+    
+    return components.compactMap { $0 }
+}
+
+/// Returns a progress toast contains a progress indicator, title and detail message.
+///
+/// - Parameter progressIndicatorStyle: The progress indicator style of `ToastView.Component.ProgressIndicator.Style`.
+/// - Parameter message: The title message content.
+/// - Parameter detail: The detail message content.
+///
+/// - Returns: Progress toast components contain activity indicator, title and detail label.
+public func progress(_ progressIndicatorStyle: ToastView.Component.ProgressIndicator.Style = .pie,
+                     message: String,
+                     detail: String? = nil) -> [UIView & ToastComponent] {
+    
+    var progressIndicator: ToastView.Component.ProgressIndicator
+    
+    switch progressIndicatorStyle {
+    case .horizontalBar:
+        progressIndicator = .horizontalBar
+    case .pie:
+        progressIndicator = .pie
+    case .ring:
+        progressIndicator = .ring
+    case .colouredBar:
+        progressIndicator = .colouredBar
+    }
+    
+    progressIndicator.layout.insets.bottom = 0.0
+    
+    let components: [(UIView & ToastComponent)?] = [progressIndicator] + _labels(with: message, detail: detail)
+    
+    return components.compactMap { $0 }
+}
+
+/// Returns a result toast contains a result indicator, title and detail message.
+///
+/// - Parameter resultIndicatorStyle: The result indicator style of `ToastView.Component.ProgressIndicator.Style`.
+/// - Parameter message: The title message content.
+/// - Parameter detail: The detail message content.
+///
+/// - Returns: Result toast components contain activity indicator, title and detail label.
+public func result(_ resultIndicatorStyle: ToastView.Component.ResultIndicator.Style = .success,
+                   message: String,
+                   detail: String? = nil) -> [UIView & ToastComponent] {
+    
+    var resultIndicator: ToastView.Component.ResultIndicator
+    
+    switch resultIndicatorStyle {
+    case .success:
+        resultIndicator = .success
+    case .error:
+        resultIndicator = .error
+    }
+    
+    resultIndicator.layout.insets.bottom = 0.0
+    
+    let components: [(UIView & ToastComponent)?] = [resultIndicator] + _labels(with: message, detail: detail)
+    
+    return components.compactMap { $0 }
+}
+
+/// Returns the message label and detail message label with a closing margin insets.
+private func _labels(with message: String, detail: String?) -> [ToastView.Component.Label?] {
+    let titleLabel = message.isEmpty ? nil : ToastView.Component.Label.title(message)
+    titleLabel?.layout.insets.top = 8.0
+    
+    let detailLabel = (detail?.isEmpty ?? true) ? nil : ToastView.Component.Label.detail(detail!)
+    detailLabel?.layout.insets.top = 8.0
+    
+    if detailLabel != nil {
+        titleLabel?.layout.insets.bottom = 0.0
+    }
+    
+    return [titleLabel, detailLabel]
+}
