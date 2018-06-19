@@ -228,6 +228,15 @@ extension ToastView {
                 debugPrint("Fail to set background color `\(String(describing: newValue))` to `ToastView.ContentView`, setting background color of `ToastView.ContentView` won't effect.")
             }
         }
+        /// The corner radius of the layer of the content view.
+        @objc
+        dynamic
+        public var cornerRadius: CGFloat = 0.0 {
+            didSet {
+                layer.cornerRadius = cornerRadius
+                layer.masksToBounds = cornerRadius > 0
+            }
+        }
         
         // MARK: Init.
         
@@ -343,7 +352,12 @@ extension ToastView.ContentView: ToastComponentsContainer {
     
     /// The content size of `ToastView.ContentView`.
     public var size: CGSize {
-        return bounds.size
+        get {
+            return bounds.size
+        }
+        set {
+            bounds.size = newValue
+        }
     }
     /// Update the layout bounds of the container with a given size.
     public func extends(size: CGSize) {
