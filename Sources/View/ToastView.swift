@@ -159,7 +159,7 @@ extension ToastView {
 
 extension ToastView: ToastComponentsProvider {
     /// Components managed by the toast view.
-    public var components: [ToastComponent] {
+    public var components: [UIView & ToastComponent] {
         return _components
     }
 }

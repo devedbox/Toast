@@ -26,7 +26,7 @@ extension UIEdgeInsets {
 // MARK: - Layout.
 
 /// Layout the frame of the receiver in a given container of `ToastComponentsContainer`.
-public func layout(component: ToastComponent, in container: ToastComponentsContainer, provider: ToastComponentsProvider) {
+public func layout(component: UIView & ToastComponent, in container: ToastComponentsContainer, provider: ToastComponentsProvider) {
     guard let order = try? provider.order(for: component) else {
         return
     }

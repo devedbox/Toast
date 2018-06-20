@@ -27,7 +27,7 @@ public enum ToastComponentOrder {
 /// of `ToastView`.
 public protocol ToastComponent: class {
     /// Returns the frame of the receiver component.
-    var frame: CGRect { get set }
+    // var frame: CGRect { get set }
     /// The layout info of the component.
     var layout: ToastView.Component.Layout { get set }
     /// Layout the frame of the receiver in a given container of `ToastComponentsContainer`.
@@ -52,25 +52,25 @@ public protocol ToastComponentsContainer {
 /// to get the state of the container and components.
 public protocol ToastComponentsProvider: class {
     /// Components managed by the container.
-    var components: [ToastComponent] { get }
+    var components: [UIView & ToastComponent] { get }
     
     /// Order of the given component in components of container.
     ///
     /// - Parameter component: The component to get order from.
     /// - Returns: The value of `ToastComponentOrder` indicates the order of the given component.
-    func order(for component: ToastComponent) throws -> ToastComponentOrder
+    func order(for component: UIView & ToastComponent) throws -> ToastComponentOrder
     
     /// Returns the previous components before the given components.
     ///
     /// - Parameter before: The component which the destined components before.
     /// - Returns: The destined components before the given component.
-    func previousComponents(before: ToastComponent) -> [ToastComponent]
+    func previousComponents(before: UIView & ToastComponent) -> [UIView & ToastComponent]
     
     /// Returns the next components after the given components.
     ///
     /// - Parameter after: The component which the destined components after.
     /// - Returns: The destined components after the given component.
-    func nextComponents(after: ToastComponent) -> [ToastComponent]
+    func nextComponents(after: UIView & ToastComponent) -> [UIView & ToastComponent]
 }
 
 // MARK: - Default.
@@ -81,7 +81,7 @@ extension ToastComponentsProvider {
     ///
     /// - Parameter component: The component to get order from.
     /// - Returns: The value of `ToastComponentOrder` indicates the order of the given component.
-    public func order(for component: ToastComponent) throws -> ToastComponentOrder {
+    public func order(for component: UIView & ToastComponent) throws -> ToastComponentOrder {
         guard
             !components.isEmpty,
             let index = components.index(where: { $0 === component })
@@ -103,7 +103,7 @@ extension ToastComponentsProvider {
     ///
     /// - Parameter before: The component which the destined components before.
     /// - Returns: The destined components before the given component.
-    public func previousComponents(before: ToastComponent) -> [ToastComponent] {
+    public func previousComponents(before: UIView & ToastComponent) -> [UIView & ToastComponent] {
         guard
             !components.isEmpty,
             let index = components.index(where: { $0 === before })
@@ -118,7 +118,7 @@ extension ToastComponentsProvider {
     ///
     /// - Parameter after: The component which the destined components after.
     /// - Returns: The destined components after the given component.
-    public func nextComponents(after: ToastComponent) -> [ToastComponent] {
+    public func nextComponents(after: UIView & ToastComponent) -> [UIView & ToastComponent] {
         guard
             !components.isEmpty,
             let index = components.index(where: { $0 === after }),
