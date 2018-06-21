@@ -17,7 +17,7 @@ public final class ToastController: UIViewController {
     public var animator: ToastAnimator = .none
     /// Returns the toast view of the toast controller.
     public var toastView: ToastView! {
-        return view as! ToastView
+        return view as? ToastView
     }
     // Overrides modal transition style.
     public override var modalTransitionStyle: UIModalTransitionStyle {
@@ -111,7 +111,11 @@ extension ToastController {
     /// - Parameter animated: Indicates showing the view controller with animation or not.
     /// - Parameter completion: The completion call back closure when showing processing finished.
     ///
-    public func show(in viewController: UIViewController, animated: Bool, duration: TimeInterval? = nil, completion: (() -> Void)? = nil) {
+    public func show(in viewController: UIViewController?, animated: Bool, duration: TimeInterval? = nil, completion: (() -> Void)? = nil) {
+        guard let viewController = viewController else {
+            return
+        }
+        
         viewController.present(self, animated: animated, completion: completion)
         _isAnimated = animated
         

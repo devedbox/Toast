@@ -101,7 +101,7 @@ extension ToastView.Component {
         /// Should treat tint color as text color.
         public var shouldTreatTintColorAsTextColor: Bool = true
         /// The layout info of the component.
-        open var layout = ToastView.Component.Layout(insets: UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0),
+        public var layout = ToastView.Component.Layout(insets: UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0),
                                                      distribution: .vertical(at: .bottom),
                                                      alignment: .center)
         
@@ -177,7 +177,7 @@ extension ToastView.Component.Label {
 
 extension ToastView.Component.Label {
     /// Layout the frame of the receiver in a given container of `ToastComponentsContainer`.
-    open func layout(in container: ToastComponentsContainer, provider: ToastComponentsProvider) {
+    public func layout(in container: ToastComponentsContainer, provider: ToastComponentsProvider) {
         guard let text = self.text, !text.isEmpty else {
             return
         }
