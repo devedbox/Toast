@@ -11,10 +11,21 @@ import Foundation
 import Dispatch
 
 public final class ToastController: UIViewController {
+    
+    /// The presentation style of `ToastController`.
+    public enum PresentationStyle {
+        /// As a presentation view controller.
+        case presented
+        /// As a child view controller.
+        case child
+    }
+    
     /// Is showing or dismissing with animation.
     private var _isAnimated: Bool?
     /// The animator of the toast controller.
-    public var animator: ToastAnimator = .none
+    public var animator: ToastAnimator = ToastAppearance.Controller.animator
+    /// The presentation style of the toast controller.
+    public var presentationStyle: PresentationStyle = ToastAppearance.Controller.presentationStyle
     /// Returns the toast view of the toast controller.
     public var toastView: ToastView! {
         return view as? ToastView
@@ -116,7 +127,13 @@ extension ToastController {
             return
         }
         
-        viewController.present(self, animated: animated, completion: completion)
+        switch presentationStyle {
+        case .presented:
+            viewController.present(self, animated: animated, completion: completion)
+        case .child:
+            viewController._add(child: self, animated: animated, completion: completion)
+        }
+        
         _isAnimated = animated
         
         if let duration = duration {
@@ -144,7 +161,16 @@ extension ToastController {
     public override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         animator.animation(toastView, false, flag)
         
-        super.dismiss(animated: flag, completion: completion)
+        switch presentationStyle {
+        case .presented:
+            if view.window == nil {
+                completion?()
+            } else {
+                super.dismiss(animated: flag, completion: completion)
+            }
+        case .child:
+            parent?._remove(child: self, animated: true, completion: completion)
+        }
     }
 }
 
@@ -201,5 +227,60 @@ extension ToastController {
                              detail: String? = nil) -> ToastController {
         
         return ToastController(components: Toast.result(resultIndicatorStyle, message: message, detail: detail))
+    }
+}
+
+// MARK: - Private.
+
+extension UIViewController {
+    /// Add the given view controller as the reveiver's child view controller.
+    fileprivate func _add(child viewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
+        viewController.willMove(toParentViewController: self)
+        view.addSubview(viewController.view)
+        
+        viewController.view.frame = view.bounds
+        viewController.view.autoresizingMask = [.flexibleBottomMargin, .flexibleRightMargin, .flexibleHeight, .flexibleWidth]
+        
+        view.setNeedsLayout()
+        
+        addChildViewController(viewController)
+        
+        if animated {
+            viewController.view.alpha = 0.0
+            UIView.animate(withDuration: 0.25, animations: {
+                viewController.view.alpha = 1.0
+            }, completion: { _ in
+                completion?()
+            })
+        } else {
+            completion?()
+        }
+    }
+    /// Remove the given view controller from the receiver.
+    fileprivate func _remove(child viewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
+        guard childViewControllers.contains(viewController) else {
+            return
+        }
+        
+        // Remove the older drawer view controller.
+        func _removeChildViewController() {
+            viewController.willMove(toParentViewController: nil)
+            viewController.view.removeFromSuperview()
+            viewController.removeFromParentViewController()
+            viewController.didMove(toParentViewController: nil)
+        }
+        
+        if animated {
+            UIView.animate(withDuration: 0.25, animations: {
+                viewController.view.alpha = 0.0
+            }, completion: { _ in
+                _removeChildViewController()
+                viewController.view.alpha = 1.0
+                completion?()
+            })
+        } else {
+            _removeChildViewController()
+            completion?()
+        }
     }
 }
