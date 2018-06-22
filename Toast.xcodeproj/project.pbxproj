@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC01E34520DD3D4800681B34 /* ToastAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC01E34420DD3D4800681B34 /* ToastAppearance.swift */; };
 		DC05DBA820CCEB72000C3B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBA720CCEB72000C3B2B /* AppDelegate.swift */; };
 		DC05DBAA20CCEB72000C3B2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05DBA920CCEB72000C3B2B /* ViewController.swift */; };
 		DC05DBAD20CCEB72000C3B2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC05DBAB20CCEB72000C3B2B /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC01E34420DD3D4800681B34 /* ToastAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAppearance.swift; sourceTree = "<group>"; };
 		DC05DBA420CCEB72000C3B2B /* Toast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC05DBA720CCEB72000C3B2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC05DBA920CCEB72000C3B2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			children = (
 				DC73326620D0C23F00082AE8 /* misc.swift */,
 				DC49C9D420D0111700FF3C1F /* ToastError.swift */,
+				DC01E34420DD3D4800681B34 /* ToastAppearance.swift */,
 				DC05DBC120CD0EE7000C3B2B /* View */,
 				DC05DBC020CD0EDD000C3B2B /* Protocol */,
 				DCD6C4FF20D3F265007486C1 /* ToastAnimator.swift */,
@@ -193,6 +196,7 @@
 				DC73326F20D3656F00082AE8 /* SamplesViewController.swift in Sources */,
 				DC05DBA820CCEB72000C3B2B /* AppDelegate.swift in Sources */,
 				DCB7AA0720D175CE00774846 /* ToastController.swift in Sources */,
+				DC01E34520DD3D4800681B34 /* ToastAppearance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
