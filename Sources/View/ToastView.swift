@@ -17,10 +17,14 @@ public final class ToastView: UIView {
     private lazy var _contentView: ContentView = ContentView()
     /// The components the toast view consists of.
     private var _components: [UIView & ToastComponent] = []
-    /// Opacity of the diming background of the toast view. Default is 0.3.
-    public var opacity: CGFloat = 0.0
+    /// Opacity of the diming background of the toast view. Default is 0.0.
+    @objc
+    dynamic
+    public var opacity: CGFloat = ToastAppearance.View.opacity
     /// True to ignore the hit test view of `ToastView` when the hit point is outside the content view. Default is false.
-    public var isTouchingThroughEnabled: Bool = false
+    @objc
+    dynamic
+    public var isTouchingThroughEnabled: Bool = ToastAppearance.View.isTouchingThroughEnabled
     /// Overrides the background color of the toast view to ignore the background color.
     public override var backgroundColor: UIColor? {
         get {
@@ -53,9 +57,6 @@ public final class ToastView: UIView {
     
     private func _init() {
         super.backgroundColor = .clear
-        
-        _contentView.layer.cornerRadius = 2.0
-        _contentView.layer.masksToBounds = true
         
         addSubview(_contentView)
     }
@@ -208,9 +209,9 @@ extension ToastView {
         /// The gradient layer for the coloured style.
         private lazy var _gradientLayer = CAGradientLayer()
         /// The max allowed layout width of content view.
-        private var _maxAllowedLayoutWidth: CGFloat = 270.0
+        private var _maxAllowedLayoutWidth: CGFloat = ToastAppearance.View.ContentView.maxAllowedLayoutWidth
         /// The style of the instance of `ContentView`.
-        public var style: Style = .normal(opacity: 0.89) {
+        public var style: Style = ToastAppearance.View.ContentView.style {
             willSet {
                 _clearPreviousState()
             }
@@ -231,7 +232,7 @@ extension ToastView {
         /// The corner radius of the layer of the content view.
         @objc
         dynamic
-        public var cornerRadius: CGFloat = 0.0 {
+        public var cornerRadius: CGFloat = ToastAppearance.View.ContentView.cornerRadius {
             didSet {
                 layer.cornerRadius = cornerRadius
                 layer.masksToBounds = cornerRadius > 0
@@ -341,6 +342,8 @@ extension ToastView.ContentView {
 
 extension ToastView.ContentView: ToastComponentsContainer {
     /// The max allowed layout width of the container.
+    @objc
+    dynamic
     public var maxAllowedLayoutWidth: CGFloat {
         get {
             return _maxAllowedLayoutWidth
