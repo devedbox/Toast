@@ -169,7 +169,7 @@ extension ToastController {
                 super.dismiss(animated: flag, completion: completion)
             }
         case .child:
-            parent?._remove(child: self, animated: true, completion: completion)
+            parent?._remove(child: self, animated: flag, completion: completion)
         }
     }
 }

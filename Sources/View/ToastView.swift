@@ -253,7 +253,8 @@ extension ToastView {
         
         private func _init() {
             super.backgroundColor = .clear
-            
+            layer.cornerRadius = cornerRadius
+            layer.masksToBounds = cornerRadius > 0
             _setupStyle(style)
         }
         
