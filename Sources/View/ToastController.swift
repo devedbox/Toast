@@ -20,8 +20,22 @@ public final class ToastController: UIViewController {
         case child
     }
     
+    /// The type represents the state of the dismissing of the toast controller.
+    private struct _DismissState {
+        /// A boolean value indicates should wait to dismiss on the appearing of the toast controller.
+        internal var isWaitingToDismissOnAppearing: Bool
+        /// A boolean value indicates should dismiss the toast controller with animation.
+        internal var isAnimatingToDismissOnAppearing: Bool
+        /// A closure executed when the dismissing complete.
+        internal var waitingCompletionOnAppearing: (() -> Void)?
+    }
+    
     /// Is showing or dismissing with animation.
     private var _isAnimated: Bool?
+    /// Is the toast controller appearred.
+    private var _isViewAppeared: Bool = false
+    /// The dismiss state of the toast controller.
+    private var _dismissState: _DismissState?
     /// The animator of the toast controller.
     public var animator: ToastAnimator = ToastAppearance.Controller.animator
     /// The presentation style of the toast controller.
@@ -98,6 +112,22 @@ public final class ToastController: UIViewController {
         
         view.setNeedsLayout()
     }
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        defer {
+            // Clear the states.
+            _dismissState = nil
+        }
+        
+        if !_isViewAppeared, case let dismissState? = _dismissState, dismissState.isWaitingToDismissOnAppearing {
+            _isViewAppeared = true
+            
+            dismiss(animated: dismissState.isAnimatingToDismissOnAppearing,
+                    completion: dismissState.waitingCompletionOnAppearing)
+        }
+    }
 }
 
 // MARK: - Public.
@@ -159,6 +189,14 @@ extension ToastController {
     /// - Parameter completion: A completion call back closure when the toast has being dismissed.
     ///
     public override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        guard _isViewAppeared else {
+            // Save the states.
+            _dismissState = _DismissState(isWaitingToDismissOnAppearing: true,
+                                          isAnimatingToDismissOnAppearing: flag,
+                                          waitingCompletionOnAppearing: completion)
+            return
+        }
+        
         animator.animation(toastView, false, flag)
         
         switch presentationStyle {
