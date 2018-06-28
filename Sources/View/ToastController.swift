@@ -117,6 +117,7 @@ public final class ToastController: UIViewController {
         super.viewDidAppear(animated)
         
         defer {
+            _isViewAppeared = true
             // Clear the states.
             _dismissState = nil
         }
