@@ -81,7 +81,9 @@ extension ToastComponentsProvider {
     ///
     /// - Parameter component: The component to get order from.
     /// - Returns: The value of `ToastComponentOrder` indicates the order of the given component.
-    public func order(for component: UIView & ToastComponent) throws -> ToastComponentOrder {
+    public func order(
+        for component: UIView & ToastComponent) throws -> ToastComponentOrder
+    {
         guard
             !components.isEmpty,
             let index = components.index(where: { $0 === component })
@@ -103,7 +105,9 @@ extension ToastComponentsProvider {
     ///
     /// - Parameter before: The component which the destined components before.
     /// - Returns: The destined components before the given component.
-    public func previousComponents(before: UIView & ToastComponent) -> [UIView & ToastComponent] {
+    public func previousComponents(
+        before: UIView & ToastComponent) -> [UIView & ToastComponent]
+    {
         guard
             !components.isEmpty,
             let index = components.index(where: { $0 === before })
@@ -118,7 +122,9 @@ extension ToastComponentsProvider {
     ///
     /// - Parameter after: The component which the destined components after.
     /// - Returns: The destined components after the given component.
-    public func nextComponents(after: UIView & ToastComponent) -> [UIView & ToastComponent] {
+    public func nextComponents(
+        after: UIView & ToastComponent) -> [UIView & ToastComponent]
+    {
         guard
             !components.isEmpty,
             let index = components.index(where: { $0 === after }),

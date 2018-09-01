@@ -26,7 +26,11 @@ extension UIEdgeInsets {
 // MARK: - Layout.
 
 /// Layout the frame of the receiver in a given container of `ToastComponentsContainer`.
-public func layout(component: UIView & ToastComponent, in container: ToastComponentsContainer, provider: ToastComponentsProvider) {
+public func layout(
+    component: UIView & ToastComponent,
+    in container: ToastComponentsContainer,
+    provider: ToastComponentsProvider)
+{
     guard let order = try? provider.order(for: component) else {
         return
     }
@@ -178,7 +182,10 @@ public func layout(component: UIView & ToastComponent, in container: ToastCompon
 /// - Parameter detail: The detail message content.
 ///
 /// - Returns: Message toast components contain title and detail label.
-public func message(_ message: String, detail: String? = nil) -> [UIView & ToastComponent] {
+public func message(
+    _ message: String,
+    detail: String? = nil) -> [UIView & ToastComponent]
+{
     let components: [(UIView & ToastComponent)] = [
         message.isEmpty ? nil : ToastView.Component.Label.title(message),
         (detail?.isEmpty ?? true) ? nil : ToastView.Component.Label.detail(detail!)
@@ -199,10 +206,11 @@ public func message(_ message: String, detail: String? = nil) -> [UIView & Toast
 /// - Parameter detail: The detail message content.
 ///
 /// - Returns: Activity toast components contain activity indicator, title and detail label.
-public func activity(_ activityIndicatorStyle: ToastView.Component.ActivityIndicator.Style = .normal,
-                     message: String,
-                     detail: String? = nil) -> [UIView & ToastComponent] {
-    
+public func activity(
+    _ activityIndicatorStyle: ToastView.Component.ActivityIndicator.Style = .normal,
+    message: String,
+    detail: String? = nil) -> [UIView & ToastComponent]
+{
     var activityIndicator: ToastView.Component.ActivityIndicator
     
     switch activityIndicatorStyle {
@@ -227,10 +235,11 @@ public func activity(_ activityIndicatorStyle: ToastView.Component.ActivityIndic
 /// - Parameter detail: The detail message content.
 ///
 /// - Returns: Progress toast components contain activity indicator, title and detail label.
-public func progress(_ progressIndicatorStyle: ToastView.Component.ProgressIndicator.Style = .pie,
-                     message: String,
-                     detail: String? = nil) -> [UIView & ToastComponent] {
-    
+public func progress(
+    _ progressIndicatorStyle: ToastView.Component.ProgressIndicator.Style = .pie,
+    message: String,
+    detail: String? = nil) -> [UIView & ToastComponent]
+{
     var progressIndicator: ToastView.Component.ProgressIndicator
     
     switch progressIndicatorStyle {
@@ -258,10 +267,11 @@ public func progress(_ progressIndicatorStyle: ToastView.Component.ProgressIndic
 /// - Parameter detail: The detail message content.
 ///
 /// - Returns: Result toast components contain activity indicator, title and detail label.
-public func result(_ resultIndicatorStyle: ToastView.Component.ResultIndicator.Style = .success,
-                   message: String,
-                   detail: String? = nil) -> [UIView & ToastComponent] {
-    
+public func result(
+    _ resultIndicatorStyle: ToastView.Component.ResultIndicator.Style = .success,
+    message: String,
+    detail: String? = nil) -> [UIView & ToastComponent]
+{
     var resultIndicator: ToastView.Component.ResultIndicator
     
     switch resultIndicatorStyle {
@@ -279,7 +289,10 @@ public func result(_ resultIndicatorStyle: ToastView.Component.ResultIndicator.S
 }
 
 /// Returns the message label and detail message label with a closing margin insets.
-private func _labels(with message: String, detail: String?) -> [ToastView.Component.Label?] {
+private func _labels(
+    with message: String,
+    detail: String?) -> [ToastView.Component.Label?]
+{
     let titleLabel = message.isEmpty ? nil : ToastView.Component.Label.title(message)
     titleLabel?.layout.insets.top = 8.0
     

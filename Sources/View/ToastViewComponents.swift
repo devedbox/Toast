@@ -77,9 +77,18 @@ extension ToastView.Component {
     /// The base view of the component view.
     open class View: UIView, ToastComponent {
         /// The layout info of the component.
-        open var layout = ToastView.Component.Layout(insets: UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0),
-                                                     distribution: .vertical(at: .bottom),
-                                                     alignment: .center)
+        open var layout = ToastView.Component.Layout(
+            insets: UIEdgeInsets(
+                top: 15.0,
+                left: 15.0,
+                bottom: 15.0,
+                right: 15.0
+            ),
+            distribution: .vertical(
+                at: .bottom
+            ),
+            alignment: .center
+        )
     }
 }
 
@@ -87,7 +96,10 @@ extension ToastView.Component {
 
 extension ToastView.Component.View {
     /// Layout the frame of the receiver in a given container of `ToastComponentsContainer`.
-    open func layout(in container: ToastComponentsContainer, provider: ToastComponentsProvider) {
+    open func layout(
+        in container: ToastComponentsContainer,
+        provider: ToastComponentsProvider)
+    {
         Toast.layout(component: self, in: container, provider: provider)
     }
 }
@@ -101,9 +113,18 @@ extension ToastView.Component {
         /// Should treat tint color as text color.
         public var shouldTreatTintColorAsTextColor: Bool = true
         /// The layout info of the component.
-        public var layout = ToastView.Component.Layout(insets: UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0),
-                                                     distribution: .vertical(at: .bottom),
-                                                     alignment: .center)
+        public var layout = ToastView.Component.Layout(
+            insets: UIEdgeInsets(
+                top: 15.0,
+                left: 15.0,
+                bottom: 15.0,
+                right: 15.0
+            ),
+            distribution: .vertical(
+                at: .bottom
+            ),
+            alignment: .center
+        )
         
         public override var textColor: UIColor! {
             get {
@@ -128,12 +149,16 @@ extension ToastView.Component {
         
         // MARK: Init.
         
-        public override init(frame: CGRect) {
+        public override init(
+            frame: CGRect)
+        {
             super.init(frame: frame)
             self._init()
         }
         
-        public required init?(coder aDecoder: NSCoder) {
+        public required init?(
+            coder aDecoder: NSCoder)
+        {
             super.init(coder: aDecoder)
             self._init()
         }
@@ -156,7 +181,9 @@ extension ToastView.Component {
 
 extension ToastView.Component.Label {
     /// Returns the title label for toast.
-    public class func title(_ string: String) -> ToastView.Component.Label {
+    public class func title(
+        _ string: String) -> ToastView.Component.Label
+    {
         let label = ToastView.Component.Label()
         label.font = UIFont.boldSystemFont(ofSize: 14.0)
         label.numberOfLines = 0
@@ -164,7 +191,9 @@ extension ToastView.Component.Label {
         return label
     }
     /// Returns the detail label for toast.
-    public class func detail(_ string: String) -> ToastView.Component.Label {
+    public class func detail(
+        _ string: String) -> ToastView.Component.Label
+    {
         let label = ToastView.Component.Label()
         label.font = UIFont.systemFont(ofSize: 12)
         label.numberOfLines = 0
@@ -177,18 +206,38 @@ extension ToastView.Component.Label {
 
 extension ToastView.Component.Label {
     /// Layout the frame of the receiver in a given container of `ToastComponentsContainer`.
-    public func layout(in container: ToastComponentsContainer, provider: ToastComponentsProvider) {
+    public func layout(
+        in container: ToastComponentsContainer,
+        provider: ToastComponentsProvider)
+    {
         guard let text = self.text, !text.isEmpty else {
             return
         }
         
-        let size = (text as NSString).boundingRect(with: CGSize(width: container.maxAllowedLayoutWidth - layout.insets.width, height: CGFloat.greatestFiniteMagnitude),
-                                                   options: [.usesLineFragmentOrigin, .usesFontLeading],
-                                                   attributes: [.font: font],
-                                                   context: nil).size
-        bounds.size = CGSize(width: ceil(size.width), height: ceil(size.height))
+        let size = (text as NSString).boundingRect(
+            with: CGSize(
+                width: container.maxAllowedLayoutWidth - layout.insets.width,
+                height: CGFloat.greatestFiniteMagnitude
+            ),
+            options: [
+                .usesLineFragmentOrigin,
+                .usesFontLeading
+            ],
+            attributes: [
+                .font: font
+            ],
+            context: nil
+        ).size
+        bounds.size = CGSize(
+            width: ceil(size.width),
+            height: ceil(size.height)
+        )
         
-        Toast.layout(component: self, in: container, provider: provider)
+        Toast.layout(
+            component: self,
+            in: container,
+            provider: provider
+        )
     }
 }
 
@@ -241,13 +290,17 @@ extension ToastView.Component {
         
         // MARK: Initializer.
         
-        public init(style: Style) {
+        public init(
+            style: Style)
+        {
             self.style = style
             super.init(frame: .zero)
             self._init()
         }
         
-        public required init?(coder aDecoder: NSCoder) {
+        public required init?(
+            coder aDecoder: NSCoder)
+        {
             style = .normal
             super.init(coder: aDecoder)
             self._init()
@@ -256,7 +309,12 @@ extension ToastView.Component {
         private func _init() {
             _angleOffset = -(CGFloat.pi * 2.0 / CGFloat(_drawingComponents)) * 2.0
             backgroundColor = .clear
-            NotificationCenter.default.addObserver(self, selector: #selector(_didBecomeActive), name: .UIApplicationDidBecomeActive, object: nil)
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(_didBecomeActive),
+                name: .UIApplicationDidBecomeActive,
+                object: nil
+            )
         }
         
         deinit {
@@ -326,7 +384,9 @@ extension ToastView.Component.ActivityIndicator {
 
 extension ToastView.Component.ActivityIndicator {
     /// Perform/Stop the animation.
-    private func _doAnimate(_ animated: Bool) {
+    private func _doAnimate(
+        _ animated: Bool)
+    {
         switch style {
         case .breachedRing:
             if animated {
@@ -356,14 +416,19 @@ extension ToastView.Component.ActivityIndicator {
     }
     
     @objc
-    private func _didBecomeActive(notification: Notification) {
+    private func _didBecomeActive(
+        notification: Notification)
+    {
         if _animating {
             isAnimating = _animating
         }
     }
     
     /// Draws normal style of the activity indicator.
-    private func _drawNormal(using context: CGContext, in rect: CGRect) {
+    private func _drawNormal(
+        using context: CGContext,
+        in rect: CGRect)
+    {
         let tintColor = self.tintColor ?? .black
         let separatorAngle = CGFloat.pi * 2.0 / CGFloat(_drawingComponents)
         for i in 0..<_drawingComponents {
@@ -397,7 +462,10 @@ extension ToastView.Component.ActivityIndicator {
     }
     
     /// Draws breached ring style of the activity indicator.
-    private func _drawBreachedRing(using context: CGContext, in rect: CGRect) {
+    private func _drawBreachedRing(
+        using context: CGContext,
+        in rect: CGRect)
+    {
         let tintColor = self.tintColor ?? .black
         context.setStrokeColor(tintColor.cgColor)
         
@@ -447,7 +515,9 @@ extension ToastView.Component {
             layer.startPoint = .zero
             layer.endPoint = CGPoint(x: 1.0, y: 0.0)
             layer.type = kCAGradientLayerAxial
-            layer.colors = [UInt](0..<360).map { UIColor(hue: CGFloat($0) / 360.0, saturation: 1.0, brightness: 1.0, alpha: 1.0).cgColor }
+            layer.colors = [UInt](0..<360).map {
+                UIColor(hue: CGFloat($0) / 360.0, saturation: 1.0, brightness: 1.0, alpha: 1.0).cgColor
+            }
             return layer
         }()
         /// The colors of the gradient layer.
@@ -527,10 +597,18 @@ extension ToastView.Component {
         public override func layoutSublayers(of layer: CALayer) {
             super.layoutSublayers(of: layer)
             
-            _gradientLayer.frame = CGRect(origin: .zero, size: CGSize(width: bounds.width * _progress, height: bounds.height))
+            _gradientLayer.frame = CGRect(
+                origin: .zero,
+                size: CGSize(
+                    width: bounds.width * _progress,
+                    height: bounds.height
+                )
+            )
         }
         
-        public override func draw(_ rect: CGRect) {
+        public override func draw(
+            _ rect: CGRect)
+        {
             super.draw(rect)
             
             guard let context = UIGraphicsGetCurrentContext() else {
@@ -610,7 +688,9 @@ extension ToastView.Component.ProgressIndicator {
     
     /// Handle display link.
     @objc
-    private func _handleDisplayLink(_ sender: CADisplayLink) {
+    private func _handleDisplayLink(
+        _ sender: CADisplayLink)
+    {
         var colors: [Any] = _gradientLayer.colors ?? []
         if let color = colors.popLast() {
             colors.insert(color, at: 0)
@@ -619,7 +699,10 @@ extension ToastView.Component.ProgressIndicator {
     }
     
     /// Draw progress of horizontal bar style.
-    private func _drawProgressOfHorizontalBar(using context: CGContext, in rect: CGRect) {
+    private func _drawProgressOfHorizontalBar(
+        using context: CGContext,
+        in rect: CGRect)
+    {
         let tintColor: UIColor = self.tintColor ?? .black
         let lineWidth: CGFloat = self.lineWidth
         let lineWidth2 = lineWidth * 2.0
@@ -740,7 +823,10 @@ extension ToastView.Component.ProgressIndicator {
     }
     
     /// Draw progress of ring style.
-    private func _drawProgressOfPie(using context: CGContext, in rect: CGRect) {
+    private func _drawProgressOfPie(
+        using context: CGContext,
+        in rect: CGRect)
+    {
         let tintColor: UIColor = self.tintColor ?? .black
         let circleRect = rect.insetBy(dx: lineWidth, dy: lineWidth)
         
@@ -768,7 +854,10 @@ extension ToastView.Component.ProgressIndicator {
     }
     
     /// Draw progress of pie style.
-    private func _drawProgressOfRing(using context: CGContext, in rect: CGRect) {
+    private func _drawProgressOfRing(
+        using context: CGContext,
+        in rect: CGRect)
+    {
         let tintColor: UIColor = self.tintColor ?? .black
         let center = CGPoint(x: rect.width * 0.5, y: rect.height * 0.5)
         let radius = (rect.width - lineWidth) * 0.5
@@ -867,11 +956,15 @@ extension ToastView.Component {
         
         // MARK: Overrides.
         
-        public override func sizeThatFits(_ size: CGSize) -> CGSize {
+        public override func sizeThatFits(
+            _ size: CGSize) -> CGSize
+        {
             return _sizeThatFits(width)
         }
         
-        public override func draw(_ rect: CGRect) {
+        public override func draw(
+            _ rect: CGRect)
+        {
             super.draw(rect)
             
             guard let context = UIGraphicsGetCurrentContext() else {
@@ -923,7 +1016,9 @@ extension ToastView.Component.ResultIndicator {
 
 extension ToastView.Component.ResultIndicator {
     /// Returns the size that fits the given width.
-    private func _sizeThatFits(_ width: CGFloat) -> CGSize {
+    private func _sizeThatFits(
+        _ width: CGFloat) -> CGSize
+    {
         switch style {
         case .success:
             return CGSize(width: width, height: width * 2.0 / 3.0)
@@ -933,7 +1028,10 @@ extension ToastView.Component.ResultIndicator {
     }
     
     /// Draws error indicator.
-    private func _drawError(using context: CGContext, in rect: CGRect) {
+    private func _drawError(
+        using context: CGContext,
+        in rect: CGRect)
+    {
         let box = rect.insetBy(dx: lineWidth, dy: lineWidth)
         
         context.move(to: CGPoint(x: box.minX, y: box.minY))
@@ -945,7 +1043,10 @@ extension ToastView.Component.ResultIndicator {
     }
     
     /// Draws success indicator.
-    private func _drawSuccess(using context: CGContext, in rect: CGRect) {
+    private func _drawSuccess(
+        using context: CGContext,
+        in rect: CGRect)
+    {
         let width = self.width - lineWidth * 2.0
         let boxSize = _sizeThatFits(width)
         let box = CGRect(origin: CGPoint(x: rect.width * 0.5 - boxSize.width * 0.5,
