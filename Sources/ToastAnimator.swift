@@ -18,7 +18,11 @@ public struct ToastAnimator {
   /// - Parameter toastView: The toast view to be animated.
   /// - Parameter isShowing: A boolean value indicates the toast controller is showing or dismissing.
   /// - Parameter isAnimated: A boolean value indicates the toast controller is transition with or without animation.
-  public typealias Animation = (_ toastView: ToastView, _ isShowing: Bool, _ isAnimated: Bool) -> Void
+  public typealias Animation = (
+    _ toastView: ToastView,
+    _ isShowing: Bool,
+    _ isAnimated: Bool
+  ) -> Void
   
   /// The animation closure of the animator.
   public let animation: Animation
@@ -57,7 +61,10 @@ extension ToastAnimator {
           initialSpringVelocity: 0.9,
           options: [],
           animations: {
-            toastView.contentView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            toastView.contentView.transform = CGAffineTransform(
+              scaleX: 0.8,
+              y: 0.8
+            )
           },
           completion: { isFinished in
             if isFinished {
@@ -96,7 +103,10 @@ extension ToastAnimator {
           initialSpringVelocity: 0.9,
           options: [],
           animations: {
-            toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: toastView.bounds.height)
+            toastView.contentView.transform = CGAffineTransform(
+              translationX: 0.0,
+              y: toastView.bounds.height
+            )
           },
           completion: { isFinished in
             if isFinished {
@@ -137,7 +147,12 @@ extension ToastAnimator {
           initialSpringVelocity: 0.9,
           options: [],
           animations: {
-            toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: toastView.bounds.height).rotated(by: -CGFloat.pi / 12.0)
+            toastView.contentView.transform = CGAffineTransform(
+              translationX: 0.0, y:
+              toastView.bounds.height
+            ).rotated(
+              by: -CGFloat.pi / 12.0
+            )
           },
           completion: { isFinished in
             if isFinished {
