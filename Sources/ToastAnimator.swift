@@ -34,18 +34,37 @@ extension ToastAnimator {
   public static let zoom = ToastAnimator { toastView, isShowing, isAnimated in
     if isAnimated {
       if isShowing {
-        toastView.contentView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-        UIView.animate(withDuration: 0.25, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.9, options: [], animations: {
-          toastView.contentView.transform = .identity
-        }, completion: nil)
-      } else {
-        UIView.animate(withDuration: 0.25, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.9, options: [], animations: {
-          toastView.contentView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        }, completion: { isFinished in
-          if isFinished {
+        toastView.contentView.transform = CGAffineTransform(
+          scaleX: 0.5,
+          y: 0.5
+        )
+        UIView.animate(
+          withDuration: 0.25,
+          delay: 0.0,
+          usingSpringWithDamping: 1.0,
+          initialSpringVelocity: 0.9,
+          options: [],
+          animations: {
             toastView.contentView.transform = .identity
+          },
+          completion: nil
+        )
+      } else {
+        UIView.animate(
+          withDuration: 0.25,
+          delay: 0.0,
+          usingSpringWithDamping: 1.0,
+          initialSpringVelocity: 0.9,
+          options: [],
+          animations: {
+            toastView.contentView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+          },
+          completion: { isFinished in
+            if isFinished {
+              toastView.contentView.transform = .identity
+            }
           }
-        })
+        )
       }
     }
   }
@@ -54,18 +73,37 @@ extension ToastAnimator {
   public static let flip = ToastAnimator { toastView, isShowing, isAnimated in
     if isAnimated {
       if isShowing {
-        toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: toastView.bounds.height)
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.9, options: [], animations: {
-          toastView.contentView.transform = .identity
-        }, completion: nil)
-      } else {
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.9, options: [], animations: {
-          toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: toastView.bounds.height)
-        }, completion: { isFinished in
-          if isFinished {
+        toastView.contentView.transform = CGAffineTransform(
+          translationX: 0.0, y:
+          toastView.bounds.height
+        )
+        UIView.animate(
+          withDuration: 0.5,
+          delay: 0.0,
+          usingSpringWithDamping: 1.0,
+          initialSpringVelocity: 0.9,
+          options: [],
+          animations: {
             toastView.contentView.transform = .identity
+          },
+          completion: nil
+        )
+      } else {
+        UIView.animate(
+          withDuration: 0.5,
+          delay: 0.0,
+          usingSpringWithDamping: 1.0,
+          initialSpringVelocity: 0.9,
+          options: [],
+          animations: {
+            toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: toastView.bounds.height)
+          },
+          completion: { isFinished in
+            if isFinished {
+              toastView.contentView.transform = .identity
+            }
           }
-        })
+        )
       }
     }
   }
@@ -74,18 +112,39 @@ extension ToastAnimator {
   public static let drop = ToastAnimator { toastView, isShowing, isAnimated in
     if isAnimated {
       if isShowing {
-        toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: -toastView.contentView.frame.maxY).rotated(by: CGFloat.pi / 12.0)
-        UIView.animate(withDuration: 0.35, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.9, options: [], animations: {
-          toastView.contentView.transform = .identity
-        }, completion: nil)
-      } else {
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.9, options: [], animations: {
-          toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: toastView.bounds.height).rotated(by: -CGFloat.pi / 12.0)
-        }, completion: { isFinished in
-          if isFinished {
+        toastView.contentView.transform = CGAffineTransform(
+          translationX: 0.0,
+          y: -toastView.contentView.frame.maxY
+        ).rotated(
+          by: CGFloat.pi / 12.0
+        )
+        UIView.animate(
+          withDuration: 0.35,
+          delay: 0.0,
+          usingSpringWithDamping: 1.0,
+          initialSpringVelocity: 0.9,
+          options: [],
+          animations: {
             toastView.contentView.transform = .identity
+          },
+          completion: nil
+        )
+      } else {
+        UIView.animate(
+          withDuration: 0.4,
+          delay: 0.0,
+          usingSpringWithDamping: 1.0,
+          initialSpringVelocity: 0.9,
+          options: [],
+          animations: {
+            toastView.contentView.transform = CGAffineTransform(translationX: 0.0, y: toastView.bounds.height).rotated(by: -CGFloat.pi / 12.0)
+          },
+          completion: { isFinished in
+            if isFinished {
+              toastView.contentView.transform = .identity
+            }
           }
-        })
+        )
       }
     }
   }
