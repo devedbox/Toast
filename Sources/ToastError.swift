@@ -8,6 +8,6 @@
 
 /// A type represents the error of `Toast`.
 public enum ToastError: Error {
-    /// Indicates the given component is not in the container.
-    case componentNotInContainer(component: ToastComponent, container: ToastComponentsProvider)
+  /// Indicates the given component is not in the container.
+  case componentNotInContainer(component: ToastComponent, container: ToastComponentsProvider)
 }
